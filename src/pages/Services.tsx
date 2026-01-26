@@ -1,7 +1,14 @@
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import "../styles/global.css";
 export default function Services() {
 	return (
-		<div>
-			<h1>Nos services</h1>
-		</div>
+		<>
+			<Header />
+			<main>
+				<h1>Nos services</h1>
+			</main>
+			<Footer />
+		</>
 	);
 }
