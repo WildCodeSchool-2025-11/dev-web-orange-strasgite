@@ -1,0 +1,13 @@
+.map-container {
+ 	width: 100%;
+ 	height: 400px;
+ 	margin-top: 20px;
+ 	border: 2px solid #ccc;
+ 	border-radius: 8px;
+ 	overflow: hidden;
+ }
+    .map-container iframe {
+    	width: 100%;
+    	height: 100%;
+    	border: none;
+    }

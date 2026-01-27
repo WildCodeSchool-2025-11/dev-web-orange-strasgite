@@ -2,6 +2,7 @@ import ContactForm from "../components/ContactForm";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import "../styles/global.css";
+import "../styles/Contact.css";
 
 export default function Contact() {
 	return (
