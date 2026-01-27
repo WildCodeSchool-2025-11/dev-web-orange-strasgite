@@ -1,0 +1,13 @@
+.bedroom-content {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: auto;
+	gap: 10px;
+}
+
+.bedroom-content img {
+	width: 100%;
+	height: 250px;
+	object-fit: cover;
+	border-radius: 15px;
+}
