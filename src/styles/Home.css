@@ -1,0 +1,53 @@
+.hero {
+	height: 100vh;
+	width: 100%;
+	background-image: url("/images/maison-strasbourg.jpg"); /* à placer dans images/public/ */
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+}
+
+.hero-overlay {
+	height: 100%;
+	width: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start; /* aligne vers le haut */
+	align-items: flex-end; /* aligne vers la droite */
+	padding: 7rem 20rem; /* espace intérieur haut/droite */
+	color: #f2e6d8;
+	text-align: right;
+}
+
+.hero-title {
+	font-size: 4rem;
+	font-weight: 400; /* moins épais */
+	font-family: Georgia, "Times New Roman", Times, serif; /* police demandée */
+	margin: 0;
+}
+
+.hero-branding {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	justify-content: flex-end;
+}
+
+.hero-logo {
+	width: 60;
+	height: 60px;
+	border-radius: 50%; /* cercle */
+	border: 2px solid white; /* contour blanc */
+	object-fit: cover;
+}
+
+.hero-subtitle {
+	font-size: 1.8rem;
+	margin-top: 1rem;
+}
+.heart {
+	color: #ff6b6b; /* rouge doux */
+	font-size: 2rem;
+}
