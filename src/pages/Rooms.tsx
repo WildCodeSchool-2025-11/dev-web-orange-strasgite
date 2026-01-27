@@ -25,14 +25,14 @@ function Rooms() {
 	return (
 		<main>
 			<Header />
-			<h1>Nos chambres</h1>
+			<h1 className="main-title">Nos chambres</h1>
 			<div className="bedroom-content">
 				{items.map((item) => (
-					<div key={item.id}>
+					<div className="bedroom-card" key={item.id}>
 						<h2>{item.nom}</h2>
 						<img src={item.image_url} alt={item.nom} width="200" />
-						<p>{item.prix_par_nuit} € / nuit</p>
-						<p>Disponible</p>
+						<p className="text-content">{item.prix_par_nuit} € / nuit</p>
+						<p className="text-content">Disponible</p>
 					</div>
 				))}
 			</div>
