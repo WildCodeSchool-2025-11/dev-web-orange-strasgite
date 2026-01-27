@@ -9,16 +9,26 @@ export default function Contact() {
 		<>
 			<Header />
 			<main>
-				<h1>Nous contacter</h1>
+				<br />
+				<br />
 				{/*Coordonnées*/}
 				<section className="coordonnees">
-					<h2>Coordonnées</h2>
+					<h2>Nous contacter</h2>
+						<br />
 					<p>📍Adresse : quai Mullenheim, 67000 Strasbourg</p>
 					<p>📞Téléphone : 03 88 12 34 56</p>
 					<p>✉️Email : contact@strasgite.fr</p>
 					<p>🕒Horaires d'ouverture : 9h - 18h du lundi au samedi</p>
 				</section>
-
+	<br />
+		<br />
+		{/*Formulaire de contact*/}
+				<section className="formulaire-contact">
+					<h2>Envoyez-nous un message</h2>
+					<ContactForm />
+				</section>
+					<br />
+						<br />
 				{/*Carte*/}
 				<section className="carte">
 					<h2>Où nous trouver</h2>
@@ -35,12 +45,9 @@ export default function Contact() {
 						></iframe>
 					</div>
 				</section>
-
-				{/*Formulaire de contact*/}
-				<section className="formulaire-contact">
-					<h2>Envoyez-nous un message</h2>
-					<ContactForm />
-				</section>
+	<br />
+		<br />
+				
 				{/*Avis clients*/}
 				<section className="avis-clients">
 					<h2>Avis de nos clients</h2>
