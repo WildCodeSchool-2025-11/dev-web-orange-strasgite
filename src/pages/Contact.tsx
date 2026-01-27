@@ -5,7 +5,6 @@ import "../styles/global.css";
 import "../styles/Contact.css";
 import ReviewsCarousel from "../components/ReviewsCarousel";
 
-
 export default function Contact() {
 	return (
 		<>
