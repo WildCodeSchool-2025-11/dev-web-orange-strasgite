@@ -1,13 +1,12 @@
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import "../styles/global.css";
-
-export default function Home() {
+export default function Services() {
 	return (
 		<>
 			<Header />
 			<main>
-				<h1>Bienvenue</h1>
+				<h1>Nos services</h1>
 			</main>
 			<Footer />
 		</>
