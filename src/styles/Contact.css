@@ -10,22 +10,26 @@
 	width: 100%;
 	height: 100%;
 	border: none;
-    
 }
 .coordonnees {
-    display: grid;
-    place-items: center;
+	display: grid;
+	place-items: center;
 }
 .carte {
-    display: grid;
-    place-items: center;
+	display: grid;
+	place-items: center;
 }
 .formulaire-contact {
-    display: grid;
-    place-items: center;
-    margin-top: 20px;
+	display: grid;
+	place-items: center;
+	margin-top: 20px;
 }
 .avis-clients {
-    display: grid;
-    place-items: center;
+	display: grid;
+	place-items: center;
+}
+.reviews-carousel {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
 }
