@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import ReservationModal from "../components/ReservationModal";
 import "../styles/global.css";
 import "../styles/Rooms.css";
 type Item = {
@@ -12,7 +13,18 @@ type Item = {
 
 function Rooms() {
 	const [items, setItems] = useState<Item[]>([]);
+	const [isOpen, setIsOpen] = useState(false);
+	const [selectedRoom, setSelectedRoom] = useState<Item | null>(null);
 
+	const handleRoomClick = (room: Item) => {
+		setIsOpen(true);
+		setSelectedRoom(room);
+	};
+	const handleCloseModal = () => {
+		setIsOpen(false);
+		setSelectedRoom(null);
+	};
+	// mise en place du fetch
 	useEffect(() => {
 		fetch("https://api-strasgite.vercel.app/items")
 			.then((res) => {
@@ -33,10 +45,18 @@ function Rooms() {
 						<img src={item.image_url} alt={item.nom} width="200" />
 						<p className="text-content">{item.prix_par_nuit} € / nuit</p>
 						<p className="text-content">Disponible</p>
+						<button type="button" onClick={() => handleRoomClick(item)}>
+							Réserver
+						</button>
 					</div>
 				))}
 			</div>
 			<Footer />
+			<ReservationModal
+				isOpen={isOpen}
+				selectedRoom={selectedRoom}
+				onClose={handleCloseModal}
+			/>
 		</main>
 	);
 }
