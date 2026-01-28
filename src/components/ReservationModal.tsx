@@ -22,6 +22,7 @@ function ReservationModal({
 	const [dateArrivee, setDateArrivee] = useState<string>("");
 	const [dateDepart, setDateDepart] = useState<string>("");
 	const [nombrePersonne, setNombrePersonne] = useState<string>("");
+	const handleValiderReservation = () => {};
 
 	return (
 		<div className="modal-backdrop">
@@ -53,6 +54,10 @@ function ReservationModal({
 						onChange={(e) => setNombrePersonne(e.target.value)}
 					/>
 				</label>
+
+				<button type="button" onClick={handleValiderReservation}>
+					Valider ma réservation
+				</button>
 
 				<button type="button" onClick={onClose}>
 					Fermer
