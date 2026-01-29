@@ -13,21 +13,21 @@
 }
 
 .contact-details {
-	background: white;
+	background: #d1a193;
 	padding: 2rem;
 	border-radius: 12px;
 	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
 }
 
 .contact-form-section {
-	background: white;
+	background: #d1a193;
 	padding: 2rem;
 	border-radius: 12px;
 	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
 }
 
 .contact-map {
-	background: white;
+	background: #d1a193;
 	padding: 1rem;
 	border-radius: 12px;
 	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
@@ -47,7 +47,7 @@
 .contact-title {
 	text-align: center;
 	font-size: 2.5rem;
-	color: #2c3e50;
+	color: #7c4f4c;
 	margin-bottom: 3rem;
 	font-weight: 600;
 }
@@ -55,7 +55,7 @@
 /* Titres des sections */
 .contact-details h2,
 .contact-form-section h2 {
-	color: #2c3e50;
+	color: #7c4f4c;
 	margin-bottom: 1.5rem;
 	font-size: 1.5rem;
 	margin-top: 0;
@@ -80,25 +80,25 @@
 
 .contact-item-content strong {
 	display: block;
-	color: #2c3e50;
+	color: #7c4f4c;
 	margin-bottom: 0.3rem;
 	font-size: 1.05rem;
 }
 
 .contact-item-content p {
 	margin: 0;
-	color: #6c757d;
+	color: whitesmoke;
 	line-height: 1.6;
 }
 
 .contact-item-content a {
-	color: #2c3e50;
+	color: whitesmoke;
 	text-decoration: none;
 	transition: color 0.3s;
 }
 
 .contact-item-content a:hover {
-	color: #1a252f;
+	color: #7c4f4c;
 	text-decoration: underline;
 }
 
@@ -117,7 +117,7 @@
 
 .form-group label {
 	font-weight: 600;
-	color: #2c3e50;
+	color: #7c4f4c;
 	font-size: 0.95rem;
 }
 
@@ -136,7 +136,7 @@
 .form-group input:focus,
 .form-group textarea:focus {
 	outline: none;
-	border-color: #2c3e50;
+	border-color: #7c4f4c;
 	box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
 }
 
@@ -146,8 +146,8 @@
 }
 
 .submit-btn {
-	background: #2c3e50;
-	color: white;
+	background: #7c4f4c;
+	color: whitesmoke;
 	padding: 1rem 2rem;
 	border: none;
 	border-radius: 6px;
@@ -160,7 +160,7 @@
 }
 
 .submit-btn:hover {
-	background: #1a252f;
+	background: #ab7458;
 	transform: translateY(-2px);
 }
 
@@ -178,7 +178,7 @@
 
 .reviews-title {
 	text-align: center;
-	color: #2c3e50;
+	color: #7c4f4c;
 	font-size: 2rem;
 	margin-bottom: 2.5rem;
 	font-weight: 600;
@@ -189,7 +189,7 @@
 	display: flex;
 	align-items: flex-start;
 	gap: 2rem;
-	background: white;
+	background: whitesmoke;
 	padding: 2.5rem;
 	border-radius: 12px;
 	box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
@@ -246,7 +246,7 @@
 .nom-client {
 	font-weight: 700;
 	font-size: 1.1rem;
-	color: #2c3e50;
+	color: #7c4f4c;
 	margin: 0 0 0.3rem 0;
 }
 
@@ -286,7 +286,7 @@
 }
 
 .indicator.active {
-	background: #2c3e50;
+	background: #7c4f4c;
 	width: 35px;
 	border-radius: 6px;
 }
