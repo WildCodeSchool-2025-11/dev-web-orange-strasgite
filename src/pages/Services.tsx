@@ -23,6 +23,16 @@ export default function Services() {
 				<section className="services-list">
 					<div className="service-card">
 						<img
+							src="/images/services/petit-dejeuner.jpg"
+							alt="Petit-déjeuner StrasGite"
+							className="service-image"
+						/>
+						<h3>Petit-déjeuner</h3>
+						<p>Produits frais, locaux et faits maison.</p>
+					</div>
+
+					<div className="service-card">
+						<img
 							src="/images/services/wifi.jpg"
 							alt="Wi-Fi haut débit"
 							className="service-image"
