@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { attractions, conseils } from "../data/attractionsData";
-import type { Attraction, Conseil } from "../types/tourisme.types";
+import { attractions } from "../data/attractionsData";
+import type { Attraction } from "../types/tourisme.types";
 import "../styles/Tourism.css";
 
 const Tourism = () => {
@@ -51,7 +51,7 @@ const Tourism = () => {
 				</div>
 
 				{/* Grille des attractions */}
-				<div id="blabla" className="grille-attractions">
+				<div id="monuments" className="grille-attractions">
 					{attractions.map((attraction: Attraction) => (
 						<div
 							key={attraction.id}
@@ -97,23 +97,6 @@ const Tourism = () => {
 					))}
 				</div>
 			</div>
-
-			{/* Section conseils */}
-			<section className="section-conseils" id="conseils">
-				<div className="conseils-contenu">
-					<h2>Nos Conseils de Locaux</h2>
-					<div className="grille-conseils">
-						{conseils.map((conseil: Conseil) => (
-							<div key={conseil.id} className="conseil-carte">
-								<h3>
-									{conseil.icone} {conseil.titre}
-								</h3>
-								<p>{conseil.description}</p>
-							</div>
-						))}
-					</div>
-				</div>
-			</section>
 		</div>
 	);
 };

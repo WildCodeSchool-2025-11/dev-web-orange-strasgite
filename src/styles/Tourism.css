@@ -186,6 +186,7 @@
 	background-size: cover;
 	background-position: center;
 	position: relative;
+	filter: sepia(60%) saturate(130%) hue-rotate(-10deg) contrast(105%);
 	overflow: hidden;
 }
 
@@ -196,11 +197,7 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: linear-gradient(
-		to bottom,
-		transparent 0%,
-		rgba(0, 0, 0, 0.4) 100%
-	);
+	background: linear-gradient(to bottom, transparent 0%, #7c4f4c 100%);
 	opacity: 0;
 	transition: opacity 0.4s ease;
 }
