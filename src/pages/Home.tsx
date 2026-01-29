@@ -1,5 +1,5 @@
-import Footer from "../components/Footer";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
+import Footer from "../components/Footer";
 import "../styles/global.css";
 import "../styles/Home.css";
 

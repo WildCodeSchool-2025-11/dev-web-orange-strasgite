@@ -1,7 +1,7 @@
 .hero {
 	height: 100vh;
 	width: 100%;
-	background-image: url("/images/maison-strasbourg.jpg"); 
+	background-image: url("/images/maison-strasbourg.jpg");
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -14,17 +14,17 @@
 	background: rgba(0, 0, 0, 0.4);
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start; 
-	align-items: flex-end; 
-	padding: 7rem 20rem; 
+	justify-content: flex-start;
+	align-items: flex-end;
+	padding: 7rem 20rem;
 	color: #f2e6d8;
 	text-align: right;
 }
 
 .hero-title {
 	font-size: 4rem;
-	font-weight: 400; 
-	font-family: Georgia, "Times New Roman", Times, serif; 
+	font-weight: 400;
+	font-family: Georgia, "Times New Roman", Times, serif;
 	margin: 0;
 }
 
@@ -52,23 +52,22 @@
 	font-size: 2rem;
 }
 .home-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 20px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 20px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
-  background: transparent;
-  z-index: 50;
+	background: transparent;
+	z-index: 50;
 }
 
 .home-logo {
-  color: white;
-  font-size: 24px;
-  font-family: Georgia, serif;
+	color: white;
+	font-size: 24px;
+	font-family: Georgia, serif;
 }
-
