@@ -1,12 +1,16 @@
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import "../styles/global.css";
 import "../styles/Home.css";
 
 export default function Home() {
 	return (
 		<>
-			<Header />
+			{/* Header personnalisé uniquement pour la Home */}
+			<div className="home-header">
+				<BurgerMenu />
+			</div>
+
 			<main>
 				<section className="hero">
 					<div className="hero-overlay">
@@ -24,6 +28,7 @@ export default function Home() {
 					</div>
 				</section>
 			</main>
+
 			<Footer />
 		</>
 	);
