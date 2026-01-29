@@ -29,7 +29,7 @@ function ReservationModal({
 			<div className="modal-content">
 				<h2>Réservation</h2>
 				<p>{selectedRoom.nom}</p>
-				<p>{selectedRoom.prix_par_nuit}</p>
+				<p>{selectedRoom.prix_par_nuit} €</p>
 				<label>
 					Date d'arrivée :
 					<input
@@ -55,11 +55,15 @@ function ReservationModal({
 					/>
 				</label>
 
-				<button type="button" onClick={handleValiderReservation}>
+				<button
+					type="button"
+					className="reservation-btn"
+					onClick={handleValiderReservation}
+				>
 					Valider ma réservation
 				</button>
 
-				<button type="button" onClick={onClose}>
+				<button type="button" className="close-btn" onClick={onClose}>
 					Fermer
 				</button>
 			</div>

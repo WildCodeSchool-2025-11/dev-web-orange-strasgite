@@ -55,3 +55,28 @@
 	border-radius: 10px;
 	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
+.modal-content label {
+	display: block;
+	margin-bottom: 15px;
+}
+
+.modal-content input {
+	display: block;
+	margin-top: 5px;
+}
+.start-btn {
+	display: block;
+	margin: 5px auto 0 auto;
+	padding: 5px;
+	text-align: center;
+	background-color: #e6b09b;
+}
+.close-btn {
+	margin-left: 10px;
+}
+.close-btn,
+.reservation-btn {
+	padding: 5px;
+	text-align: center;
+	background-color: #e6b09b;
+}

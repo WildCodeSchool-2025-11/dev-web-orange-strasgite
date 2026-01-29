@@ -45,7 +45,11 @@ function Rooms() {
 						<img src={item.image_url} alt={item.nom} width="200" />
 						<p className="text-content">{item.prix_par_nuit} € / nuit</p>
 						<p className="text-content">Disponible</p>
-						<button type="button" onClick={() => handleRoomClick(item)}>
+						<button
+							type="button"
+							className="start-btn"
+							onClick={() => handleRoomClick(item)}
+						>
 							Réserver
 						</button>
 					</div>
