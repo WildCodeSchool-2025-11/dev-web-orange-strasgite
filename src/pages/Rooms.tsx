@@ -36,7 +36,9 @@ function Rooms() {
 	}, []);
 	return (
 		<main>
-			<BurgerMenu />
+			<div className="rooms-header">
+				<BurgerMenu />
+			</div>
 			<h1 className="main-title">Nos chambres</h1>
 			<div className="bedroom-content">
 				{items.map((item) => (

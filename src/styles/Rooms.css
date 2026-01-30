@@ -1,3 +1,10 @@
+.rooms-header {
+	background-color: #692817;
+	height: 70px;
+	width: 100%;
+	position: relative;
+}
+
 .bedroom-content {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
