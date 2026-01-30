@@ -197,7 +197,11 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background: linear-gradient(to bottom, transparent 0%, #7c4f4c 100%);
+	background: linear-gradient(
+		to bottom,
+		transparent 0%,
+		#7c4f4c 100%
+	);
 	opacity: 0;
 	transition: opacity 0.4s ease;
 }
@@ -246,82 +250,6 @@
 	flex-shrink: 0;
 }
 
-/* ===================================
-   SECTION CONSEILS
-   =================================== */
-
-.section-conseils {
-	background: linear-gradient(
-		135deg,
-		var(--couleur-principale) 0%,
-		#1a252f 100%
-	);
-	color: white;
-	padding: 5rem 2rem;
-	margin-top: 5rem;
-	position: relative;
-	overflow: hidden;
-}
-
-.section-conseils::before {
-	content: "";
-	position: absolute;
-	top: -50%;
-	right: -10%;
-	width: 500px;
-	height: 500px;
-	background: radial-gradient(
-		circle,
-		rgba(201, 169, 97, 0.15),
-		transparent 70%
-	);
-	border-radius: 50%;
-}
-
-.conseils-contenu {
-	max-width: 1200px;
-	margin: 0 auto;
-	position: relative;
-	z-index: 1;
-}
-
-.conseils-contenu h2 {
-	font-family: "Playfair Display", Georgia, serif;
-	font-size: 2.5rem;
-	margin-bottom: 3rem;
-	text-align: center;
-}
-
-.grille-conseils {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-	gap: 2rem;
-}
-
-.conseil-carte {
-	background: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(10px);
-	padding: 2rem;
-	border-radius: 12px;
-	border: 1px solid rgba(255, 255, 255, 0.2);
-	transition: all 0.3s ease;
-}
-
-.conseil-carte:hover {
-	background: rgba(255, 255, 255, 0.15);
-	transform: translateY(-5px);
-}
-
-.conseil-carte h3 {
-	font-size: 1.4rem;
-	margin-bottom: 1rem;
-	color: var(--couleur-accent);
-}
-
-.conseil-carte p {
-	line-height: 1.7;
-	opacity: 0.95;
-}
 
 /* ===================================
    ANIMATIONS AU SCROLL
