@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
 import ReservationModal from "../components/ReservationModal";
 import "../styles/global.css";
 import "../styles/Rooms.css";
@@ -36,7 +36,7 @@ function Rooms() {
 	}, []);
 	return (
 		<main>
-			<Header />
+			<BurgerMenu />
 			<h1 className="main-title">Nos chambres</h1>
 			<div className="bedroom-content">
 				{items.map((item) => (
