@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import { attractions } from "../data/attractionsData";
 import type { Attraction } from "../types/tourisme.types";
 import "../styles/Tourism.css";
@@ -29,6 +31,10 @@ const Tourism = () => {
 
 	return (
 		<div className="page-tourisme">
+			{/* Header personnalisé avec BurgerMenu */}
+			<div className="tourisme-header">
+				<BurgerMenu />
+			</div>
 			{/* Hero Section */}
 			<div className="hero-tourisme">
 				<div className="hero-contenu">
