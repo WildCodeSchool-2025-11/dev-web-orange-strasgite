@@ -1,12 +1,15 @@
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+import ReviewsCarousel from "../components/ReviewsCarousel";
 import "../styles/Contact.css";
 
-export default function Contact() {
+export default function ContactPage() {
 	return (
-		<>
-			{/* Header en haut */}
-			<Header />
+		<main>
+			<div className="rooms-header">
+				<BurgerMenu />
+			</div>
+
 			<div className="contact-container">
 				<h1 className="contact-title">Nous Contacter</h1>
 
@@ -109,11 +112,9 @@ export default function Contact() {
 				<div className="contact-reviews">
 					<ReviewsCarousel />
 				</div>
+				{/* Footer à la fin */}
+				<Footer />
 			</div>
-			{/* Footer en bas */}
-			<Footer />
-		</>
+		</main>
 	);
 }
-
-import ReviewsCarousel from "../components/ReviewsCarousel";
