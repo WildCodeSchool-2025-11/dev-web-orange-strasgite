@@ -1,0 +1,349 @@
+/* ===================================
+   TOURISME.CSS - Page Découvrir Strasbourg
+   =================================== */
+
+/* Variables CSS */
+:root {
+	--couleur-principale: #ab7458;
+	--couleur-accent: #c9a961;
+	--couleur-secondaire: #8b4513;
+	--couleur-claire: #f4f1ea;
+	--couleur-texte: #7c4f4c;
+}
+
+/* Reset pour la page tourisme */
+.page-tourisme * {
+	box-sizing: border-box;
+}
+
+.page-tourisme {
+	font-family:
+		"Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	color: var(--couleur-texte);
+	background: var(--couleur-claire);
+	line-height: 1.6;
+}
+
+/* ===================================
+   HERO SECTION
+   =================================== */
+
+.hero-tourisme {
+	height: 85vh;
+	background:
+		linear-gradient(#9f7f3480, #9c6d4db3),
+		url("/src/assets/images/strasbourg.jpg"); /* ← VOTRE PHOTO */
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.hero-tourisme::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: radial-gradient(circle at 30% 50%, #9f7f3480, transparent 50%);
+	animation: pulseGlow 8s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+	0%,
+	100% {
+		opacity: 0.3;
+	}
+	50% {
+		opacity: 0.6;
+	}
+}
+
+.hero-contenu {
+	text-align: center;
+	color: white;
+	z-index: 2;
+	animation: fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(40px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.hero-tourisme h1 {
+	font-family: "Playfair Display", Georgia, serif;
+	font-size: 4.5rem;
+	font-weight: 700;
+	margin-bottom: 1rem;
+	letter-spacing: 2px;
+	text-shadow: 3px 3px 8px #7c4f4c;
+}
+
+.hero-tourisme p {
+	font-size: 1.5rem;
+	font-weight: 300;
+	letter-spacing: 1px;
+	animation: fadeInUp 1.5s ease-out 0.3s backwards;
+}
+
+/* ===================================
+   CONTENEUR PRINCIPAL
+   =================================== */
+
+.conteneur {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 4rem 2rem;
+}
+
+/* ===================================
+   INTRODUCTION
+   =================================== */
+
+.intro {
+	text-align: center;
+	margin-bottom: 5rem;
+	animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.intro h2 {
+	font-family: "Playfair Display", Georgia, serif;
+	font-size: 3rem;
+	color: var(--couleur-principale);
+	margin-bottom: 1.5rem;
+	position: relative;
+	display: inline-block;
+}
+
+.intro h2::after {
+	content: "";
+	position: absolute;
+	bottom: -10px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 80px;
+	height: 3px;
+	background: var(--couleur-accent);
+}
+
+.intro p {
+	font-size: 1.2rem;
+	color: #7c4f4c;
+	max-width: 800px;
+	margin: 2rem auto 0;
+	line-height: 1.8;
+}
+
+/* ===================================
+   GRILLE DES ATTRACTIONS
+   =================================== */
+
+.grille-attractions {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+	gap: 3rem;
+	margin-top: 4rem;
+}
+
+.carte-attraction {
+	background: white;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	cursor: pointer;
+}
+
+.carte-attraction:hover {
+	transform: translateY(-12px);
+	box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+}
+
+.image-attraction {
+	width: 100%;
+	height: 280px;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	filter: sepia(60%) saturate(130%) hue-rotate(-10deg) contrast(105%);
+	overflow: hidden;
+}
+
+.image-attraction::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(to bottom, transparent 0%, #7c4f4c 100%);
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+
+.carte-attraction:hover .image-attraction::before {
+	opacity: 1;
+}
+
+.contenu-attraction {
+	padding: 2rem;
+}
+
+.contenu-attraction h3 {
+	font-family: "Playfair Display", Georgia, serif;
+	font-size: 1.8rem;
+	color: var(--couleur-principale);
+	margin-bottom: 1rem;
+}
+
+.contenu-attraction p {
+	color: #7c4f4c;
+	margin-bottom: 1.5rem;
+	line-height: 1.7;
+}
+
+.infos-pratiques {
+	display: flex;
+	gap: 1.5rem;
+	flex-wrap: wrap;
+	padding-top: 1rem;
+	border-top: 1px solid #eee;
+}
+
+.info-item {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #7c4f4c;
+	font-size: 0.9rem;
+}
+
+.icone {
+	width: 18px;
+	height: 18px;
+	fill: var(--couleur-accent);
+	flex-shrink: 0;
+}
+
+/* ===================================
+   ANIMATIONS AU SCROLL
+   =================================== */
+
+.fade-in-scroll {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: all 0.8s ease-out;
+}
+
+.fade-in-scroll.visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 768px) {
+	.hero-tourisme {
+		height: 60vh;
+	}
+
+	.hero-tourisme h1 {
+		font-size: 2.5rem;
+	}
+
+	.hero-tourisme p {
+		font-size: 1.1rem;
+	}
+
+	.grille-attractions {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.nav-contenu {
+		flex-wrap: wrap;
+		gap: 1rem;
+		justify-content: space-around;
+	}
+
+	.nav-lien {
+		font-size: 0.9rem;
+	}
+
+	.intro h2 {
+		font-size: 2rem;
+	}
+
+	.intro p {
+		font-size: 1rem;
+	}
+
+	.conteneur {
+		padding: 2rem 1rem;
+	}
+
+	.section-conseils {
+		padding: 3rem 1rem;
+	}
+
+	.conseils-contenu h2 {
+		font-size: 2rem;
+	}
+
+	.grille-conseils {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero-tourisme h1 {
+		font-size: 2rem;
+	}
+
+	.hero-tourisme p {
+		font-size: 1rem;
+	}
+
+	.grille-attractions {
+		grid-template-columns: 1fr;
+	}
+
+	.carte-attraction {
+		margin-bottom: 1rem;
+	}
+
+	.image-attraction {
+		height: 220px;
+	}
+
+	.contenu-attraction {
+		padding: 1.5rem;
+	}
+
+	.contenu-attraction h3 {
+		font-size: 1.5rem;
+	}
+}
