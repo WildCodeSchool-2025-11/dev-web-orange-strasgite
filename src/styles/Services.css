@@ -1,3 +1,11 @@
+.header-logo {
+  height: 48px; 
+  width: auto;
+  object-fit: contain;
+  margin-top: 8px;   /* petit espace en haut */
+  margin-left: 8px;  /* petit espace à gauche */
+}
+
 .services-page {
 	padding: 2rem;
 }
