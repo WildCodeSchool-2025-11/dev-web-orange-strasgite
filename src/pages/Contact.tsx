@@ -1,9 +1,45 @@
+import emailjs from "@emailjs/browser";
+
+import { useRef, useState } from "react";
+
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import ReviewsCarousel from "../components/ReviewsCarousel";
+
 import "../styles/Contact.css";
 
 export default function ContactPage() {
+	const formRef = useRef<HTMLFormElement | null>(null);
+	const [submitted, setSubmitted] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+	const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setSubmitted(false);
+		setErrorMessage(null);
+
+		if (!formRef.current) return;
+
+		setLoading(true);
+
+		emailjs
+			.sendForm(
+				import.meta.env.VITE_EMAILJS_SERVICE_ID,
+				import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+				formRef.current,
+				import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+			)
+			.then(() => {
+				setSubmitted(true);
+				formRef.current?.reset();
+			})
+			.catch(() => {
+				setErrorMessage("Erreur lors de l’envoi ❌");
+			})
+			.finally(() => setLoading(false));
+	};
+
 	return (
 		<main>
 			<div className="rooms-header">
@@ -57,7 +93,7 @@ export default function ContactPage() {
 					<div className="contact-form-section">
 						<h2>Envoyez-nous un message</h2>
 
-						<form className="contact-form">
+						<form ref={formRef} onSubmit={sendEmail} className="contact-form">
 							<div className="form-group">
 								<label htmlFor="name">Nom complet</label>
 								<input
@@ -66,6 +102,7 @@ export default function ContactPage() {
 									name="name"
 									placeholder="Votre nom"
 									required
+									autoComplete="name"
 								/>
 							</div>
 
@@ -77,6 +114,7 @@ export default function ContactPage() {
 									name="email"
 									placeholder="votre@email.com"
 									required
+									autoComplete="email"
 								/>
 							</div>
 
@@ -88,12 +126,20 @@ export default function ContactPage() {
 									rows={5}
 									placeholder="Votre message..."
 									required
-								></textarea>
+									autoComplete="off"
+								/>
 							</div>
 
-							<button type="submit" className="submit-btn">
-								Envoyer le message
+							<button type="submit" className="submit-btn" disabled={loading}>
+								{loading ? "Envoi..." : "Envoyer le message"}
 							</button>
+
+							{submitted && (
+								<p className="success-message">
+									Merci pour votre message ! Nous vous répondrons bientôt.
+								</p>
+							)}
+							{errorMessage && <p className="error-message">{errorMessage}</p>}
 						</form>
 					</div>
 
@@ -101,7 +147,7 @@ export default function ContactPage() {
 					<div className="contact-map">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d42330.15!2d7.7521!3d48.5734!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4796c8495e18b2e9%3A0x971a483118ec8d0!2sStrasbourg!5e0!3m2!1sfr!2sfr!4v1234567890"
-							allowFullScreen={true}
+							allowFullScreen
 							loading="lazy"
 							title="Localisation du gîte à Strasbourg"
 						></iframe>
@@ -112,7 +158,8 @@ export default function ContactPage() {
 				<div className="contact-reviews">
 					<ReviewsCarousel />
 				</div>
-				{/* Footer à la fin */}
+
+				{/* Footer */}
 				<Footer />
 			</div>
 		</main>
