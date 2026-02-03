@@ -41,7 +41,7 @@ function Rooms() {
 			</div>
 			<h1 className="main-title">Nos chambres</h1>
 			<div className="bedroom-content">
-				{items.map((item) => (
+				{items.slice(0, 6).map((item) => (
 					<div className="bedroom-card" key={item.id}>
 						<h2>{item.nom}</h2>
 						<img src={item.image_url} alt={item.nom} width="200" />
