@@ -59,11 +59,16 @@
 	padding: 20px;
 
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: center; /* CENTRE l’avatar */
 
 	background: transparent;
-	z-index: 50;
+	z-index: 999;
+	gap: 20px;
+}
+
+.home-header > *:last-child {
+	margin-left: auto; /* pousse le BurgerMenu à droite */
 }
 
 .home-logo {
