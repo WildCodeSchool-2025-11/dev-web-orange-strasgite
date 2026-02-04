@@ -1,34 +1,60 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function LoginForm() {
-	const [email, setEmail] = useState<string>("");
-	const [password, setPassword] = useState<string>("");
-	const [message, setMessage] = useState<string | null>(null);
+export default function LoginForm({ onSuccess }: { onSuccess: () => void }) {
+	const navigate = useNavigate();
 
-	const handleLogin = () => {
-		if (!email || !password) {
-			setMessage("Veuillez remplir tous les champs.");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+
+		const ok = login(email, password);
+
+		if (!ok) {
+			setError("Email ou mot de passe incorrect");
 			return;
 		}
 
-		const role = email.endsWith("@strasgite.fr") ? "gerant" : "client";
+		// 🔥 On lit le rôle APRÈS login, pas via hasRole()
+		const isGerant = email === "gerant@strasgite.fr";
 
-		localStorage.setItem("auth", "true");
-		localStorage.setItem("role", role);
-		localStorage.setItem("email", email);
+		if (isGerant) {
+			navigate("/gerant");
+		} else {
+			navigate("/");
+		}
 
-		setMessage(`Connexion réussie (${role})`);
+		// 🔥 On ferme le modal après la redirection
+		setTimeout(() => {
+			onSuccess();
+		}, 50);
 	};
 
 	return (
-		<div style={{ padding: "20px" }}>
-			{message && <p>{message}</p>}
+		<form
+			onSubmit={handleSubmit}
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				gap: "12px",
+				width: "100%",
+			}}
+		>
+			<h2>Connexion</h2>
+
+			{error && (
+				<p style={{ color: "red", margin: 0, fontSize: "14px" }}>{error}</p>
+			)}
 
 			<input
 				type="email"
 				placeholder="Adresse email"
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
+				required
 			/>
 
 			<input
@@ -36,11 +62,10 @@ export default function LoginForm() {
 				placeholder="Mot de passe"
 				value={password}
 				onChange={(e) => setPassword(e.target.value)}
+				required
 			/>
 
-			<button type="button" onClick={handleLogin}>
-				Se connecter
-			</button>
-		</div>
+			<button type="submit">Se connecter</button>
+		</form>
 	);
 }
