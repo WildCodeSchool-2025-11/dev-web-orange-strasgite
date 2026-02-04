@@ -5,7 +5,7 @@ import Rooms from "./pages/Rooms";
 import Services from "./pages/Services";
 import Tourism from "./pages/Tourism";
 import "./styles/global.css";
-import RoomDetail from "./pages/Roomdetail";
+import RoomDetail from "./pages/RoomDetail";
 
 export default function App() {
 	return (

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import ReservationModal from "../components/ReservationModal";
-import "../styles/RoomDetail.css";
 
 type Item = {
 	id: number;
@@ -16,7 +15,6 @@ function RoomDetail() {
 	const { roomId } = useParams();
 	const [room, setRoom] = useState<Item | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
-	console.log(roomId);
 
 	useEffect(() => {
 		if (!roomId) return;
@@ -24,37 +22,44 @@ function RoomDetail() {
 		fetch(`https://api-strasgite.vercel.app/items/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
-				console.log("Données reçues :", data);
 				setRoom(data);
 			})
 			.catch((err) => console.error("Erreur fetch :", err));
 	}, [roomId]);
 
 	return (
-		<div>
-			<BurgerMenu />
+		<main>
+			<div className="rooms-header">
+				<BurgerMenu />
+			</div>
 
-			<h1>RoomDetail Page</h1>
-			{room ? (
-				<div>
-					<h2>{room.nom}</h2>
-					<img src={room.image_url} alt={room.nom} />
-					<p> {room.prix_par_nuit} € / nuit </p>
-					<button type="button" onClick={() => setIsOpen(true)}>
-						Réserver
-					</button>
-				</div>
-			) : (
-				<p>Chargement ...</p>
-			)}
+			<div className="room-detail-container">
+				{room ? (
+					<>
+						<h1>{room.nom}</h1>
+						<img src={room.image_url} alt={room.nom} width="400" />
+						<p className="prix">{room.prix_par_nuit} € / nuit</p>
+						<button
+							type="button"
+							className="start-btn"
+							onClick={() => setIsOpen(true)}
+						>
+							Réserver
+						</button>
+					</>
+				) : (
+					<p>Chargement...</p>
+				)}
+			</div>
 
 			<Footer />
+
 			<ReservationModal
 				isOpen={isOpen}
 				selectedRoom={room}
 				onClose={() => setIsOpen(false)}
 			/>
-		</div>
+		</main>
 	);
 }
 
