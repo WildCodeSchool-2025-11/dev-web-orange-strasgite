@@ -7,34 +7,30 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [role, setRole] = useState<"client" | "gerant">("client");
 	const [error, setError] = useState("");
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		const ok = register(name, email, password);
+		const ok = register(name, email, password, role);
 
 		if (!ok) {
-			setError("Cet email existe déjà");
+			setError("Un compte existe déjà avec cet email");
 			return;
 		}
 
-		setError("");
 		onSuccess();
 	};
 
 	return (
 		<form
 			onSubmit={handleSubmit}
-			style={{ display: "flex", flexDirection: "column", gap: "12px" }}
+			style={{ display: "flex", flexDirection: "column", gap: "10px" }}
 		>
-			<h3>Créer un compte</h3>
-
-			{error && <p style={{ color: "red" }}>{error}</p>}
-
 			<input
 				type="text"
-				placeholder="Votre nom"
+				placeholder="Nom complet"
 				value={name}
 				onChange={(e) => setName(e.target.value)}
 				required
@@ -56,7 +52,17 @@ export default function RegisterForm({ onSuccess }: { onSuccess: () => void }) {
 				required
 			/>
 
-			<button type="submit">Créer mon compte</button>
+			<select
+				value={role}
+				onChange={(e) => setRole(e.target.value as "client" | "gerant")}
+			>
+				<option value="client">Client</option>
+				<option value="gerant">Gérant</option>
+			</select>
+
+			{error && <p style={{ color: "red" }}>{error}</p>}
+
+			<button type="submit">Créer un compte</button>
 		</form>
 	);
 }

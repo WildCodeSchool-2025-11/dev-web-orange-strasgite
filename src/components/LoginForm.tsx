@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function LoginForm({ onSuccess }: { onSuccess: () => void }) {
-	const navigate = useNavigate();
+	const { login } = useAuth();
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -18,40 +18,17 @@ export default function LoginForm({ onSuccess }: { onSuccess: () => void }) {
 			return;
 		}
 
-		// 🔥 On lit le rôle APRÈS login, pas via hasRole()
-		const isGerant = email === "gerant@strasgite.fr";
-
-		if (isGerant) {
-			navigate("/gerant");
-		} else {
-			navigate("/");
-		}
-
-		// 🔥 On ferme le modal après la redirection
-		setTimeout(() => {
-			onSuccess();
-		}, 50);
+		onSuccess();
 	};
 
 	return (
 		<form
 			onSubmit={handleSubmit}
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				gap: "12px",
-				width: "100%",
-			}}
+			style={{ display: "flex", flexDirection: "column", gap: "10px" }}
 		>
-			<h2>Connexion</h2>
-
-			{error && (
-				<p style={{ color: "red", margin: 0, fontSize: "14px" }}>{error}</p>
-			)}
-
 			<input
 				type="email"
-				placeholder="Adresse email"
+				placeholder="Email"
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 				required
@@ -64,6 +41,8 @@ export default function LoginForm({ onSuccess }: { onSuccess: () => void }) {
 				onChange={(e) => setPassword(e.target.value)}
 				required
 			/>
+
+			{error && <p style={{ color: "red" }}>{error}</p>}
 
 			<button type="submit">Se connecter</button>
 		</form>
