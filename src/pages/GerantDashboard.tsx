@@ -2,10 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function GerantDashboard() {
-	const { user, hasRole, logout } = useAuth();
+	const { user, logout } = useAuth();
 	const navigate = useNavigate();
 
-	if (!hasRole("gerant")) {
+	// Protection d'accès : uniquement pour les gérants
+	if (!user || user.role !== "gerant") {
 		return (
 			<div style={{ padding: "30px" }}>
 				<h2>Accès refusé</h2>
@@ -21,7 +22,7 @@ export default function GerantDashboard() {
 
 	return (
 		<div style={{ padding: "30px" }}>
-			<h1 style={{ marginBottom: "10px" }}>Bienvenue {user?.name} (Gérant)</h1>
+			<h1 style={{ marginBottom: "10px" }}>Bienvenue {user.name} (Gérant)</h1>
 
 			<p style={{ marginBottom: "20px" }}>
 				Vous êtes connecté en tant que gérant.
