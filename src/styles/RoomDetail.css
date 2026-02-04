@@ -1,4 +1,8 @@
-/* RoomDetail.css */
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
 
 .room-detail-container {
 	display: flex;
@@ -13,7 +17,7 @@
 
 .room-detail-container img {
 	width: 100%;
-	max-width: 500px; /* pas trop grand */
+	max-width: 500px;
 	border-radius: 10px;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
