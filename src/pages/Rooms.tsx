@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import ReservationModal from "../components/ReservationModal";
@@ -44,7 +45,9 @@ function Rooms() {
 				{items.slice(0, 6).map((item) => (
 					<div className="bedroom-card" key={item.id}>
 						<h2>{item.nom}</h2>
-						<img src={item.image_url} alt={item.nom} width="200" />
+						<Link to={`/rooms/${item.id}`}>
+							<img src={item.image_url} alt={item.nom} width="200" />
+						</Link>
 						<p className="text-content">{item.prix_par_nuit} € / nuit</p>
 						<p className="text-content">Disponible</p>
 						<button
