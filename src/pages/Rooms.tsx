@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
-import ReservationModal from "../components/ReservationModal";
+
 import "../styles/global.css";
 import "../styles/Rooms.css";
 type Item = {
@@ -14,17 +14,7 @@ type Item = {
 
 function Rooms() {
 	const [items, setItems] = useState<Item[]>([]);
-	const [isOpen, setIsOpen] = useState(false);
-	const [selectedRoom, setSelectedRoom] = useState<Item | null>(null);
 
-	const handleRoomClick = (room: Item) => {
-		setIsOpen(true);
-		setSelectedRoom(room);
-	};
-	const handleCloseModal = () => {
-		setIsOpen(false);
-		setSelectedRoom(null);
-	};
 	// mise en place du fetch
 	useEffect(() => {
 		fetch("https://api-strasgite.vercel.app/items")
@@ -50,22 +40,15 @@ function Rooms() {
 						</Link>
 						<p className="text-content">{item.prix_par_nuit} € / nuit</p>
 						<p className="text-content">Disponible</p>
-						<button
-							type="button"
-							className="start-btn"
-							onClick={() => handleRoomClick(item)}
-						>
-							Réserver
-						</button>
+						<Link to={`/rooms/${item.id}`}>
+							<button type="button" className="start-btn">
+								Voir détails
+							</button>
+						</Link>
 					</div>
 				))}
 			</div>
 			<Footer />
-			<ReservationModal
-				isOpen={isOpen}
-				selectedRoom={selectedRoom}
-				onClose={handleCloseModal}
-			/>
 		</main>
 	);
 }
