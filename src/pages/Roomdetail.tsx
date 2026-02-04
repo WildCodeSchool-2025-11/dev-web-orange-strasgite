@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import ReservationModal from "../components/ReservationModal";
+import "../styles/RoomDetail.css";
 
 type Item = {
 	id: number;
