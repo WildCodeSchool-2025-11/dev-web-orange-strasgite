@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
-import ReservationModal from "../components/ReservationModal";
+
 import "../styles/global.css";
 import "../styles/Rooms.css";
 type Item = {
@@ -13,17 +14,7 @@ type Item = {
 
 function Rooms() {
 	const [items, setItems] = useState<Item[]>([]);
-	const [isOpen, setIsOpen] = useState(false);
-	const [selectedRoom, setSelectedRoom] = useState<Item | null>(null);
 
-	const handleRoomClick = (room: Item) => {
-		setIsOpen(true);
-		setSelectedRoom(room);
-	};
-	const handleCloseModal = () => {
-		setIsOpen(false);
-		setSelectedRoom(null);
-	};
 	// mise en place du fetch
 	useEffect(() => {
 		fetch("https://api-strasgite.vercel.app/items")
@@ -41,28 +32,23 @@ function Rooms() {
 			</div>
 			<h1 className="main-title">Nos chambres</h1>
 			<div className="bedroom-content">
-				{items.map((item) => (
+				{items.slice(0, 6).map((item) => (
 					<div className="bedroom-card" key={item.id}>
 						<h2>{item.nom}</h2>
-						<img src={item.image_url} alt={item.nom} width="200" />
+						<Link to={`/rooms/${item.id}`}>
+							<img src={item.image_url} alt={item.nom} width="200" />
+						</Link>
 						<p className="text-content">{item.prix_par_nuit} € / nuit</p>
 						<p className="text-content">Disponible</p>
-						<button
-							type="button"
-							className="start-btn"
-							onClick={() => handleRoomClick(item)}
-						>
-							Réserver
-						</button>
+						<Link to={`/rooms/${item.id}`}>
+							<button type="button" className="start-btn">
+								Voir détails
+							</button>
+						</Link>
 					</div>
 				))}
 			</div>
 			<Footer />
-			<ReservationModal
-				isOpen={isOpen}
-				selectedRoom={selectedRoom}
-				onClose={handleCloseModal}
-			/>
 		</main>
 	);
 }
