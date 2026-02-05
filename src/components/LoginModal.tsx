@@ -1,3 +1,5 @@
+import LoginForm from "./LoginForm";
+
 export default function LoginModal({ onClose }: { onClose: () => void }) {
 	return (
 		<button
@@ -50,7 +52,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
 
 				<h2>Connexion</h2>
 
-				{/* Ton formulaire */}
+				<LoginForm onSuccess={onClose} />
 			</div>
 		</button>
 	);

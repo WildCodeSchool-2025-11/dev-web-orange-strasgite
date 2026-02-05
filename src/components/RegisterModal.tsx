@@ -1,3 +1,5 @@
+import RegisterForm from "./RegisterForm";
+
 export default function RegisterModal({ onClose }: { onClose: () => void }) {
 	return (
 		<button
@@ -50,7 +52,7 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
 
 				<h2>Créer un compte</h2>
 
-				{/* Ton formulaire */}
+				<RegisterForm onSuccess={onClose} />
 			</div>
 		</button>
 	);
