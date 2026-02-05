@@ -10,10 +10,20 @@ type Item = {
 	nom: string;
 	image_url: string;
 	prix_par_nuit: number;
+	isFavorite?: boolean;
 };
 
 function Rooms() {
 	const [items, setItems] = useState<Item[]>([]);
+	const toggleFavorite = (chambreId: number) => {
+		const nouveauxItems = items.map((item) => {
+			if (item.id === chambreId) {
+				return { ...item, isFavorite: !item.isFavorite };
+			}
+			return item;
+		});
+		setItems(nouveauxItems);
+	};
 
 	// mise en place du fetch
 	useEffect(() => {
@@ -45,6 +55,13 @@ function Rooms() {
 								Voir détails
 							</button>
 						</Link>
+						<button
+							type="button"
+							onClick={() => toggleFavorite(item.id)}
+							className="favorite-btn"
+						>
+							{item.isFavorite ? "❤️" : "🤍"}
+						</button>
 					</div>
 				))}
 			</div>
