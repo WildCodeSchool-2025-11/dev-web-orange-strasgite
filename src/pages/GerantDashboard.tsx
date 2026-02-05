@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
+import Footer from "../components/Footer";
 import { useAuth } from "../context/AuthContext";
 
 export default function GerantDashboard() {
@@ -22,17 +23,20 @@ export default function GerantDashboard() {
 	};
 
 	return (
-		<div style={{ padding: "30px" }}>
-			<h1 style={{ marginBottom: "10px" }}>Bienvenue {user.name} (Gérant)</h1>
+		<div>
+			<BurgerMenu />
+			<div style={{ padding: "30px" }}>
+				<h1 style={{ marginBottom: "10px" }}>Bienvenue {user.name} (Gérant)</h1>
 
-			<p style={{ marginBottom: "20px" }}>
-				Vous êtes connecté en tant que gérant.
-			</p>
+				<p style={{ marginBottom: "20px" }}>
+					Vous êtes connecté en tant que gérant.
+				</p>
 
-			<button type="button" onClick={handleLogout}>
-				Se déconnecter et retourner à l'accueil
-			</button>
-			<Header />
+				<button type="button" onClick={handleLogout}>
+					Se déconnecter et retourner à l'accueil
+				</button>
+				<Footer />
+			</div>
 		</div>
 	);
 }
