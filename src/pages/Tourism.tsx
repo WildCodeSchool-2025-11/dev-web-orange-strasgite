@@ -5,6 +5,8 @@ import { attractions } from "../data/attractionsData";
 import type { Attraction } from "../types/tourisme.types";
 import "../styles/Tourism.css";
 
+import Footer from "../components/Footer";
+
 const Tourism = () => {
 	useEffect(() => {
 		// Animation au scroll
@@ -103,6 +105,7 @@ const Tourism = () => {
 					))}
 				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 };

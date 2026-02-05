@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 import { useAuth } from "../context/AuthContext";
 
 export default function GerantDashboard() {
@@ -31,6 +32,7 @@ export default function GerantDashboard() {
 			<button type="button" onClick={handleLogout}>
 				Se déconnecter et retourner à l'accueil
 			</button>
+			<Header />
 		</div>
 	);
 }
