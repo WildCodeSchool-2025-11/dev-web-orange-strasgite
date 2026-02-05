@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Contact from "./pages/Contact";
+import GerantDashboard from "./pages/GerantDashboard";
 import Home from "./pages/Home";
 import Rooms from "./pages/Rooms";
 import Services from "./pages/Services";
@@ -16,6 +17,7 @@ export default function App() {
 			<Route path="/services" element={<Services />} />
 			<Route path="/tourism" element={<Tourism />} />
 			<Route path="/contact" element={<Contact />} />
+			<Route path="/gerant" element={<GerantDashboard />} />
 		</Routes>
 	);
 }

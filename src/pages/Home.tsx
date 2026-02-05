@@ -1,3 +1,4 @@
+import AccountAvatar from "../components/AccountAvatar";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import "../styles/global.css";
@@ -6,8 +7,8 @@ import "../styles/Home.css";
 export default function Home() {
 	return (
 		<>
-			{/* Header personnalisé uniquement pour la Home */}
 			<div className="home-header">
+				<AccountAvatar />
 				<BurgerMenu />
 			</div>
 
