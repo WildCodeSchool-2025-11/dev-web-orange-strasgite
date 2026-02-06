@@ -158,10 +158,9 @@ export default function ContactPage() {
 				<div className="contact-reviews">
 					<ReviewsCarousel />
 				</div>
-
-				{/* Footer */}
-				<Footer />
 			</div>
+			{/* Footer */}
+			<Footer />
 		</main>
 	);
 }
