@@ -1,13 +1,19 @@
 import LoginForm from "./LoginForm";
 
 export default function LoginModal({ onClose }: { onClose: () => void }) {
+	const handleKey = (e: React.KeyboardEvent) => {
+		if (e.key === "Escape") onClose();
+		if (e.key === " " || e.key === "Enter") {
+			e.preventDefault();
+			e.stopPropagation();
+		}
+	};
+
 	return (
 		<button
 			type="button"
 			onClick={onClose}
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " ") onClose();
-			}}
+			onKeyDown={handleKey}
 			style={{
 				position: "fixed",
 				top: 0,
@@ -28,7 +34,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
 				role="dialog"
 				aria-modal="true"
 				onClick={(e) => e.stopPropagation()}
-				onKeyDown={(e) => e.stopPropagation()}
+				onKeyDown={(e) => e.stopPropagation()} // ← Correction Biome
 				style={{
 					background: "white",
 					padding: "20px",
