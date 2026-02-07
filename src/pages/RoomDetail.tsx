@@ -27,7 +27,7 @@ import ReservationModal from "../components/ReservationModal";
 type Item = {
 	id: number;
 	nom: string;
-	image_url: string;
+	images_urls: string[];
 	prix_par_nuit: number;
 };
 
@@ -40,7 +40,7 @@ function RoomDetail() {
 	useEffect(() => {
 		if (!roomId) return;
 		const id = Number(roomId);
-		fetch(`https://api-strasgite.vercel.app/items/${id}`)
+		fetch(`http://localhost:3310/api/chambres/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("Données reçues :", data);
@@ -110,7 +110,7 @@ function RoomDetail() {
 						}}
 					>
 						<img
-							src={room.image_url}
+							src={room.images_urls[0]}
 							alt={room.nom}
 							style={{
 								width: "100%",

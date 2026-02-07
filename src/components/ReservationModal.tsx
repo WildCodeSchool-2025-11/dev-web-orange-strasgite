@@ -3,7 +3,7 @@ import "../styles/Rooms.css";
 type Item = {
 	id: number;
 	nom: string;
-	image_url: string;
+	images_urls: string[];
 	prix_par_nuit: number;
 };
 type ReservationModalProps = {
