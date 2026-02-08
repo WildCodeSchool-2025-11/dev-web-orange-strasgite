@@ -27,7 +27,7 @@ function Rooms() {
 
 	// mise en place du fetch
 	useEffect(() => {
-		fetch("http://localhost:3310/api/chambres")
+		fetch("https://api-projet-2-strasgite.vercel.app/api/chambres")
 			.then((res) => {
 				return res.json();
 			})

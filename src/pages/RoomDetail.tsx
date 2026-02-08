@@ -41,7 +41,7 @@ function RoomDetail() {
 	useEffect(() => {
 		if (!roomId) return;
 		const id = Number(roomId);
-		fetch(`http://localhost:3310/api/chambres/${id}`)
+		fetch(`https://api-projet-2-strasgite.vercel.app/api/chambres/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("Données reçues :", data);
