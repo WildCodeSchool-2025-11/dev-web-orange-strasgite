@@ -2,12 +2,8 @@ import RegisterForm from "./RegisterForm";
 
 export default function RegisterModal({ onClose }: { onClose: () => void }) {
 	return (
-		<button
-			type="button"
-			onClick={onClose}
-			onKeyDown={(e) => {
-				if (e.key === "Enter" || e.key === " ") onClose();
-			}}
+		<div
+			role="presentation"
 			style={{
 				position: "fixed",
 				top: 0,
@@ -19,11 +15,26 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
 				justifyContent: "center",
 				alignItems: "center",
 				zIndex: 1000,
-				border: "none",
-				padding: 0,
-				cursor: "pointer",
 			}}
 		>
+			{/* Overlay cliquable compatible Biome */}
+			<button
+				type="button"
+				aria-hidden="true"
+				tabIndex={-1}
+				onClick={onClose}
+				onKeyDown={(e) => e.stopPropagation()}
+				style={{
+					position: "absolute",
+					inset: 0,
+					background: "transparent",
+					border: "none",
+					padding: 0,
+					margin: 0,
+					cursor: "pointer",
+				}}
+			/>
+
 			<div
 				role="dialog"
 				aria-modal="true"
@@ -34,6 +45,8 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
 					padding: "20px",
 					borderRadius: "8px",
 					minWidth: "300px",
+					position: "relative",
+					zIndex: 1,
 				}}
 			>
 				<button
@@ -54,6 +67,6 @@ export default function RegisterModal({ onClose }: { onClose: () => void }) {
 
 				<RegisterForm onSuccess={onClose} />
 			</div>
-		</button>
+		</div>
 	);
 }
