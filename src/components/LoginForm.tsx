@@ -28,7 +28,7 @@ export default function LoginForm({ onSuccess }: { onSuccess: () => void }) {
 		>
 			<input
 				type="email"
-				placeholder="Email"
+				placeholder="Adresse email"
 				value={email}
 				onChange={(e) => setEmail(e.target.value)}
 				required

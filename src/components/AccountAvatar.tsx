@@ -124,16 +124,41 @@ export default function AccountAvatar() {
 					{/* Si un client est connecté */}
 					{user && user.role === "client" && (
 						<>
-							<button type="button" style={menuBtnStyle}>
+							<button
+								type="button"
+								style={menuBtnStyle}
+								onClick={() => {
+									navigate("/mon-compte");
+									setOpenMenu(false);
+								}}
+							>
 								Mon compte
 							</button>
-							<button type="button" style={menuBtnStyle}>
+
+							<button
+								type="button"
+								style={menuBtnStyle}
+								onClick={() => {
+									navigate("/mes-reservations");
+									setOpenMenu(false);
+								}}
+							>
 								Mes réservations
 							</button>
-							<button type="button" style={menuBtnStyle}>
+
+							<button
+								type="button"
+								style={menuBtnStyle}
+								onClick={() => {
+									navigate("/mes-favoris");
+									setOpenMenu(false);
+								}}
+							>
 								Mes favoris
 							</button>
+
 							<hr />
+
 							<button
 								type="button"
 								style={menuBtnStyle}
