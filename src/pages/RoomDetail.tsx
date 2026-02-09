@@ -27,7 +27,7 @@ import ReservationModal from "../components/ReservationModal";
 type Item = {
 	id: number;
 	nom: string;
-	image_url: string;
+	images_urls: string[];
 	prix_par_nuit: number;
 };
 
@@ -36,11 +36,12 @@ function RoomDetail() {
 	const navigate = useNavigate();
 	const [room, setRoom] = useState<Item | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
+	const [activeImageIndex, setActiveImageIndex] = useState(0);
 
 	useEffect(() => {
 		if (!roomId) return;
 		const id = Number(roomId);
-		fetch(`https://api-strasgite.vercel.app/items/${id}`)
+		fetch(`https://api-projet-2-strasgite.vercel.app/api/chambres/${id}`)
 			.then((res) => res.json())
 			.then((data) => {
 				console.log("Données reçues :", data);
@@ -87,7 +88,6 @@ function RoomDetail() {
 					>
 						Retour aux chambres
 					</Button>
-
 					{/* Titre de la chambre */}
 					<Typography
 						variant="h4"
@@ -98,28 +98,73 @@ function RoomDetail() {
 						{room.nom}
 					</Typography>
 
-					{/* Image principale - Style Airbnb avec bordure arrondie */}
-					<Box
-						sx={{
-							width: "100%",
-							height: { xs: "300px", md: "500px" }, // Responsive
-							borderRadius: 3,
-							overflow: "hidden",
-							mb: 4,
-							boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-						}}
-					>
-						<img
-							src={room.image_url}
-							alt={room.nom}
-							style={{
+					{/* Galerie d'images */}
+					<Box sx={{ mb: 4 }}>
+						{/* Image principale */}
+						<Box
+							sx={{
 								width: "100%",
-								height: "100%",
-								objectFit: "cover",
+								height: { xs: "300px", md: "500px" },
+								borderRadius: 3,
+								overflow: "hidden",
+								mb: 2,
+								boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
 							}}
-						/>
-					</Box>
+						>
+							<img
+								src={room.images_urls[activeImageIndex]}
+								alt={`${room.nom} - ${activeImageIndex + 1}`}
+								style={{
+									width: "100%",
+									height: "100%",
+									objectFit: "cover",
+								}}
+							/>
+						</Box>
 
+						{/* Miniatures cliquables */}
+						<Box
+							sx={{
+								display: "flex",
+								gap: 2,
+								justifyContent: "center",
+							}}
+						>
+							{room.images_urls.map((url, index) => (
+								<Box
+									key={index}
+									onClick={() => setActiveImageIndex(index)}
+									sx={{
+										width: { xs: "80px", md: "120px" },
+										height: { xs: "60px", md: "90px" },
+										borderRadius: 2,
+										overflow: "hidden",
+										cursor: "pointer",
+										border:
+											activeImageIndex === index
+												? "3px solid #692817"
+												: "2px solid #ddd",
+										opacity: activeImageIndex === index ? 1 : 0.6,
+										transition: "all 0.3s ease",
+										"&:hover": {
+											opacity: 1,
+											transform: "scale(1.05)",
+										},
+									}}
+								>
+									<img
+										src={url}
+										alt={`${room.nom} miniature ${index + 1}`}
+										style={{
+											width: "100%",
+											height: "100%",
+											objectFit: "cover",
+										}}
+									/>
+								</Box>
+							))}
+						</Box>
+					</Box>
 					{/* Layout 2 colonnes avec Flexbox */}
 					<Box
 						sx={{

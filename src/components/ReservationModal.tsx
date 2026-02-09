@@ -1,11 +1,23 @@
+import {
+	Box,
+	Button,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	Divider,
+	TextField,
+	Typography,
+} from "@mui/material";
 import { useState } from "react";
-import "../styles/Rooms.css";
+
 type Item = {
 	id: number;
 	nom: string;
-	image_url: string;
+	images_urls: string[];
 	prix_par_nuit: number;
 };
+
 type ReservationModalProps = {
 	isOpen: boolean;
 	selectedRoom: Item | null;
@@ -17,57 +29,169 @@ function ReservationModal({
 	selectedRoom,
 	onClose,
 }: ReservationModalProps) {
-	if (isOpen === false) return null;
-	if (!selectedRoom) return null;
 	const [dateArrivee, setDateArrivee] = useState<string>("");
 	const [dateDepart, setDateDepart] = useState<string>("");
 	const [nombrePersonne, setNombrePersonne] = useState<string>("");
-	const handleValiderReservation = () => {};
+
+	const handleValiderReservation = () => {
+		setDateArrivee("");
+		setDateDepart("");
+		setNombrePersonne("");
+		onClose();
+	};
+
+	if (!selectedRoom) return null;
 
 	return (
-		<div className="modal-backdrop">
-			<div className="modal-content">
-				<h2>Réservation</h2>
-				<p>{selectedRoom.nom}</p>
-				<p>{selectedRoom.prix_par_nuit} €</p>
-				<label>
-					Date d'arrivée :
-					<input
+		<Dialog
+			open={isOpen}
+			onClose={onClose}
+			maxWidth="sm"
+			fullWidth
+			slotProps={{
+				paper: {
+					sx: {
+						borderRadius: 3,
+						p: 1,
+					},
+				},
+			}}
+		>
+			{/* Titre */}
+			<DialogTitle>
+				<Typography variant="h5" fontWeight="bold" color="#692817">
+					Réservation
+				</Typography>
+			</DialogTitle>
+
+			<Divider />
+
+			{/* Contenu */}
+			<DialogContent sx={{ pt: 3 }}>
+				{/* Info chambre */}
+				<Box
+					sx={{
+						backgroundColor: "#f2e6d8",
+						p: 2,
+						borderRadius: 2,
+						mb: 3,
+					}}
+				>
+					<Typography variant="h6" fontWeight="bold" gutterBottom>
+						{selectedRoom.nom}
+					</Typography>
+					<Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+						<Typography variant="h6" color="primary" fontWeight="bold">
+							{selectedRoom.prix_par_nuit} €
+						</Typography>
+						<Typography variant="body2" color="text.secondary">
+							par nuit
+						</Typography>
+					</Box>
+				</Box>
+
+				{/* Formulaire */}
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						gap: 2.5,
+					}}
+				>
+					{/* Date d'arrivée */}
+					<TextField
+						label="Date d'arrivée"
 						type="date"
 						value={dateArrivee}
 						onChange={(e) => setDateArrivee(e.target.value)}
+						fullWidth
+						slotProps={{
+							inputLabel: {
+								shrink: true,
+							},
+						}}
+						required
 					/>
-				</label>
-				<label>
-					Date de départ :
-					<input
+
+					{/* Date de départ */}
+					<TextField
+						label="Date de départ"
 						type="date"
 						value={dateDepart}
 						onChange={(e) => setDateDepart(e.target.value)}
+						fullWidth
+						slotProps={{
+							inputLabel: {
+								shrink: true,
+							},
+							htmlInput: {
+								min: dateArrivee,
+							},
+						}}
+						required
 					/>
-				</label>
-				<label>
-					Nombre de personnes :
-					<input
+
+					{/* Nombre de personnes */}
+					<TextField
+						label="Nombre de personnes"
 						type="number"
 						value={nombrePersonne}
 						onChange={(e) => setNombrePersonne(e.target.value)}
+						fullWidth
+						slotProps={{
+							htmlInput: {
+								min: 1,
+								max: 10,
+							},
+						}}
+						required
 					/>
-				</label>
+				</Box>
+			</DialogContent>
 
-				<button
-					type="button"
-					className="reservation-btn"
+			<Divider />
+
+			{/* Actions */}
+			<DialogActions sx={{ p: 2.5, gap: 1 }}>
+				<Button
+					onClick={onClose}
+					variant="outlined"
+					sx={{
+						borderRadius: 2,
+						textTransform: "none",
+						fontWeight: "bold",
+						color: "#692817",
+						borderColor: "#692817",
+						"&:hover": {
+							borderColor: "#692817",
+							backgroundColor: "rgba(105, 40, 23, 0.08)",
+						},
+					}}
+				>
+					Annuler
+				</Button>
+				<Button
 					onClick={handleValiderReservation}
+					variant="contained"
+					disabled={!dateArrivee || !dateDepart || !nombrePersonne}
+					sx={{
+						borderRadius: 2,
+						textTransform: "none",
+						fontWeight: "bold",
+						backgroundColor: "#e6b09b",
+						"&:hover": {
+							backgroundColor: "#d19a85",
+						},
+						"&:disabled": {
+							backgroundColor: "#e0e0e0",
+						},
+					}}
 				>
 					Valider ma réservation
-				</button>
-
-				<button type="button" className="close-btn" onClick={onClose}>
-					Fermer
-				</button>
-			</div>
-		</div>
+				</Button>
+			</DialogActions>
+		</Dialog>
 	);
 }
+
 export default ReservationModal;
