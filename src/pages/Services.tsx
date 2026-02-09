@@ -1,30 +1,23 @@
+import contactImage from "../assets/images/service.jpg";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
-import "../styles/global.css";
+import PageHero from "../components/PageHero/PageHero";
 import "../styles/Services.css";
+import "../styles/global.css";
 
 export default function Services() {
 	return (
-		<>
-			{/* Header */}
-			<div className="page-header">
-				<img
-					src="/images/logo-strasgite.png"
-					alt="Logo StrasGite"
-					className="header-logo"
-				/>
-
+		<main>
+			<div className="rooms-header">
 				<BurgerMenu />
 			</div>
+			<PageHero
+				title="Nos Services"
+				subtitle="Confort, authenticité et hospitalité au cœur de Strasbourg"
+				backgroundImage={contactImage}
+			/>
 
-			<main className="services-page">
-				<section className="services-hero">
-					<h2 className="services-title">Nos Services</h2>
-					<p className="services-subtitle">
-						Confort, authenticité et hospitalité au cœur de Strasbourg
-					</p>
-				</section>
-
+			<div className="services-page">
 				<section className="services-list">
 					<div className="service-card">
 						<img
@@ -66,9 +59,8 @@ export default function Services() {
 						<p>Profitez du calme dans notre jardin verdoyant jusqu'à 23h.</p>
 					</div>
 				</section>
-			</main>
-
+			</div>
 			<Footer />
-		</>
+		</main>
 	);
 }

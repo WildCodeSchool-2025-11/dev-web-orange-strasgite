@@ -1,11 +1,11 @@
 import { useEffect } from "react";
-
+import strasbourgImage from "../assets/images/strasbourg.jpg";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
-import { attractions } from "../data/attractionsData";
-import type { Attraction } from "../types/tourisme.types";
-import "../styles/Tourism.css";
-
 import Footer from "../components/Footer";
+import PageHero from "../components/PageHero/PageHero";
+import { attractions } from "../data/attractionsData";
+import "../styles/Tourism.css";
+import type { Attraction } from "../types/tourisme.types";
 
 const Tourism = () => {
 	useEffect(() => {
@@ -37,13 +37,13 @@ const Tourism = () => {
 			<div className="tourisme-header">
 				<BurgerMenu />
 			</div>
-			{/* Hero Section */}
-			<div className="hero-tourisme">
-				<div className="hero-contenu">
-					<h1>Découvrez Strasbourg</h1>
-					<p>Une ville authentique au cœur de l'Alsace</p>
-				</div>
-			</div>
+
+			{/* Hero Section avec le composant réutilisable */}
+			<PageHero
+				title="Découvrez Strasbourg"
+				subtitle="Une ville authentique au cœur de l'Alsace"
+				backgroundImage={strasbourgImage}
+			/>
 
 			{/* Contenu principal */}
 			<div className="conteneur">
@@ -105,6 +105,8 @@ const Tourism = () => {
 					))}
 				</div>
 			</div>
+
+			{/* Footer */}
 			<Footer />
 		</div>
 	);
