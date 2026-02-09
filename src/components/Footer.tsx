@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
+import Newsletter from "./Newsletter";
 
 export default function Footer() {
 	return (
@@ -6,37 +7,35 @@ export default function Footer() {
 			<div className="footerContent">
 				{/* Section 1: Logo et Contact */}
 				<div className="footerSection">
-					<div className="footerLogo">
-						<img src="/images/logo-strasgite.png" alt="Strasgite Logo" />
-					</div>
-					<p className="footerAddress">
-						Strasgite, Votre gîte à Strasbourg
-						<br />
-						123 Rue de la Paix
-						<br />
-						67000 Strasbourg
-						<br />
-						France
-					</p>
+					<h3>Strasgite</h3>
+					123 Rue de la Paix
+					<br />
+					67000 Strasbourg
+					<br />
+					France
 					<p className="footerContact">
 						<strong>Tél :</strong> +33 1 23 45 67 89
 						<br />
-						<strong>Email :</strong> contact@strasgite.fr
+						<strong>Email :</strong>
+						{""}
+						<a href="mailto:contact@gite-strasbourg.fr">
+							contact@gite-strasbourg.fr
+						</a>
 					</p>
 				</div>
 
 				{/* Section 2: Navigation */}
 				<div className="footerSection">
-					<h3>Strasgite</h3>
+					<h3>Bienvenue</h3>
 					<ul className="footerLinks">
 						<li>
 							<a href="/">Accueil</a>
 						</li>
 						<li>
-							<a href="/chambres">Chambres</a>
+							<a href="/rooms">Chambres</a>
 						</li>
 						<li>
-							<a href="/tourisme">Tourisme</a>
+							<a href="/tourism">Tourisme</a>
 						</li>
 						<li>
 							<a href="/services">Services</a>
@@ -48,21 +47,8 @@ export default function Footer() {
 				</div>
 
 				{/* Section 3: Newsletter */}
-				<div className="footerSection">
-					<h3>Newsletter</h3>
-					<p className="newsletterText">
-						Restez informé de nos actualités et offres spéciales
-					</p>
-					<form className="newsletterForm">
-						<input
-							type="email"
-							placeholder="Votre email"
-							required
-							aria-label="Email pour newsletter"
-						/>
-						<button type="submit">S'inscrire</button>
-					</form>
-				</div>
+
+				<Newsletter />
 
 				{/* Section 4: Réseaux sociaux */}
 				<div className="footerSection">
