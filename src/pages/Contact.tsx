@@ -1,11 +1,10 @@
 import emailjs from "@emailjs/browser";
-
 import { useRef, useState } from "react";
-
+import contactImage from "../assets/images/contact-hero.jpg";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
+import PageHero from "../components/PageHero/PageHero";
 import ReviewsCarousel from "../components/ReviewsCarousel";
-
 import "../styles/Contact.css";
 
 export default function ContactPage() {
@@ -35,7 +34,7 @@ export default function ContactPage() {
 				formRef.current?.reset();
 			})
 			.catch(() => {
-				setErrorMessage("Erreur lors de l’envoi ❌");
+				setErrorMessage("Erreur lors de l'envoi ❌");
 			})
 			.finally(() => setLoading(false));
 	};
@@ -46,9 +45,14 @@ export default function ContactPage() {
 				<BurgerMenu />
 			</div>
 
-			<div className="contact-container">
-				<h1 className="contact-title">Nous Contacter</h1>
+			{/* Hero Section ajouté ici */}
+			<PageHero
+				title="Contactez-nous"
+				subtitle="Nous sommes là pour répondre à vos questions"
+				backgroundImage={contactImage}
+			/>
 
+			<div className="contact-container">
 				<div className="contact-grid-three">
 					{/* Colonne 1 : Coordonnées */}
 					<div className="contact-details">
@@ -159,6 +163,7 @@ export default function ContactPage() {
 					<ReviewsCarousel />
 				</div>
 			</div>
+
 			{/* Footer */}
 			<Footer />
 		</main>

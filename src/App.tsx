@@ -2,11 +2,14 @@ import { Route, Routes } from "react-router-dom";
 import Contact from "./pages/Contact";
 import GerantDashboard from "./pages/GerantDashboard";
 import Home from "./pages/Home";
+import MesFavorisPage from "./pages/MesFavorisPage";
+import MesReservationsPage from "./pages/MesReservationsPage";
+import MonComptePage from "./pages/MonComptePage";
+import RoomDetail from "./pages/RoomDetail";
 import Rooms from "./pages/Rooms";
 import Services from "./pages/Services";
 import Tourism from "./pages/Tourism";
 import "./styles/global.css";
-import RoomDetail from "./pages/RoomDetail";
 
 export default function App() {
 	return (
@@ -18,6 +21,9 @@ export default function App() {
 			<Route path="/tourism" element={<Tourism />} />
 			<Route path="/contact" element={<Contact />} />
 			<Route path="/gerant" element={<GerantDashboard />} />
+			<Route path="/mon-compte" element={<MonComptePage />} />
+			<Route path="/mes-reservations" element={<MesReservationsPage />} />
+			<Route path="/mes-favoris" element={<MesFavorisPage />} />
 		</Routes>
 	);
 }
