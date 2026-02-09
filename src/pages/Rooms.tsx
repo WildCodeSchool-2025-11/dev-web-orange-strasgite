@@ -1,55 +1,210 @@
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import {
+	Box,
+	Button,
+	Card,
+	CardActions,
+	CardContent,
+	CardMedia,
+	Chip,
+	Container,
+	IconButton,
+	Typography,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 
-import "../styles/global.css";
-import "../styles/Rooms.css";
 type Item = {
 	id: number;
 	nom: string;
-	image_url: string;
+	images_urls: string[];
 	prix_par_nuit: number;
+	isFavorite?: boolean;
 };
 
 function Rooms() {
 	const [items, setItems] = useState<Item[]>([]);
 
-	// mise en place du fetch
+	const toggleFavorite = (chambreId: number) => {
+		const nouveauxItems = items.map((item) => {
+			if (item.id === chambreId) {
+				return { ...item, isFavorite: !item.isFavorite };
+			}
+			return item;
+		});
+		setItems(nouveauxItems);
+	};
+
+	// Mise en place du fetch
 	useEffect(() => {
-		fetch("https://api-strasgite.vercel.app/items")
-			.then((res) => {
-				return res.json();
-			})
+		fetch("https://api-projet-2-strasgite.vercel.app/api/chambres")
+			.then((res) => res.json())
 			.then((data) => {
 				setItems(data);
-			});
+			})
+			.catch((err) => console.error("Erreur fetch:", err));
 	}, []);
+
 	return (
-		<main>
-			<div className="rooms-header">
+		<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh" }}>
+			{/* Header avec BurgerMenu */}
+			<Box sx={{ py: 2 }}>
 				<BurgerMenu />
-			</div>
-			<h1 className="main-title">Nos chambres</h1>
-			<div className="bedroom-content">
-				{items.slice(0, 6).map((item) => (
-					<div className="bedroom-card" key={item.id}>
-						<h2>{item.nom}</h2>
-						<Link to={`/rooms/${item.id}`}>
-							<img src={item.image_url} alt={item.nom} width="200" />
-						</Link>
-						<p className="text-content">{item.prix_par_nuit} € / nuit</p>
-						<p className="text-content">Disponible</p>
-						<Link to={`/rooms/${item.id}`}>
-							<button type="button" className="start-btn">
-								Voir détails
-							</button>
-						</Link>
-					</div>
-				))}
-			</div>
+			</Box>
+
+			{/* Container principal */}
+			<Container maxWidth="lg" sx={{ py: 4 }}>
+				{/* Titre principal */}
+				<Typography
+					variant="h3"
+					component="h1"
+					fontWeight="bold"
+					textAlign="center"
+					sx={{
+						mb: 6,
+						color: "#692817",
+					}}
+				>
+					Nos chambres
+				</Typography>
+
+				{/* Grille de cartes */}
+				<Box
+					sx={{
+						display: "grid",
+						gridTemplateColumns: {
+							xs: "1fr", // 1 colonne sur mobile
+							sm: "repeat(2, 1fr)", // 2 colonnes sur tablette
+							md: "repeat(3, 1fr)", // 3 colonnes sur desktop
+						},
+						gap: 3,
+					}}
+				>
+					{items.map((item) => (
+						<Card
+							key={item.id}
+							sx={{
+								height: "100%",
+								display: "flex",
+								flexDirection: "column",
+								borderRadius: 3,
+								boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+								transition: "transform 0.3s ease, box-shadow 0.3s ease",
+								"&:hover": {
+									transform: "translateY(-8px)",
+									boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+								},
+								position: "relative",
+							}}
+						>
+							{/* Bouton favori en position absolue */}
+							<IconButton
+								onClick={() => toggleFavorite(item.id)}
+								sx={{
+									position: "absolute",
+									top: 8,
+									right: 8,
+									backgroundColor: "rgba(255, 255, 255, 0.9)",
+									zIndex: 1,
+									"&:hover": {
+										backgroundColor: "rgba(255, 255, 255, 1)",
+									},
+								}}
+							>
+								{item.isFavorite ? (
+									<Favorite sx={{ color: "#e63946" }} />
+								) : (
+									<FavoriteBorder />
+								)}
+							</IconButton>
+
+							{/* Image cliquable */}
+							<Link
+								to={`/rooms/${item.id}`}
+								style={{ textDecoration: "none", color: "inherit" }}
+							>
+								<CardMedia
+									component="img"
+									height="240"
+									image={item.images_urls[0]}
+									alt={item.nom}
+									sx={{
+										objectFit: "cover",
+									}}
+								/>
+							</Link>
+
+							{/* Contenu de la carte */}
+							<CardContent sx={{ flexGrow: 1 }}>
+								<Typography
+									variant="h5"
+									component="h2"
+									fontWeight="bold"
+									gutterBottom
+									sx={{ color: "#692817" }}
+								>
+									{item.nom}
+								</Typography>
+
+								<Box
+									sx={{
+										display: "flex",
+										alignItems: "center",
+										gap: 1,
+										mb: 2,
+									}}
+								>
+									<Typography variant="h6" color="primary" fontWeight="bold">
+										{item.prix_par_nuit} €
+									</Typography>
+									<Typography variant="body2" color="text.secondary">
+										/ nuit
+									</Typography>
+								</Box>
+
+								<Chip
+									label="Disponible"
+									color="success"
+									size="small"
+									sx={{ fontWeight: "medium" }}
+								/>
+							</CardContent>
+
+							{/* Actions */}
+							<CardActions sx={{ p: 2, pt: 0 }}>
+								<Link
+									to={`/rooms/${item.id}`}
+									style={{ textDecoration: "none", width: "100%" }}
+								>
+									<Button
+										variant="contained"
+										fullWidth
+										sx={{
+											py: 1.5,
+											borderRadius: 2,
+											textTransform: "none",
+											fontSize: "1rem",
+											fontWeight: "bold",
+											backgroundColor: "#e6b09b",
+											"&:hover": {
+												backgroundColor: "#d19a85",
+											},
+										}}
+									>
+										Voir détails
+									</Button>
+								</Link>
+							</CardActions>
+						</Card>
+					))}
+				</Box>
+			</Container>
+
 			<Footer />
-		</main>
+		</Box>
 	);
 }
 
