@@ -11,6 +11,11 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
+import {
+	type Reservation,
+	useReservations,
+} from "../context/ReservationContext";
+
 type Item = {
 	id: number;
 	nom: string;
@@ -32,8 +37,22 @@ function ReservationModal({
 	const [dateArrivee, setDateArrivee] = useState<string>("");
 	const [dateDepart, setDateDepart] = useState<string>("");
 	const [nombrePersonne, setNombrePersonne] = useState<string>("");
+	const { ajouterReservation } = useReservations();
 
 	const handleValiderReservation = () => {
+		if (!selectedRoom) return;
+		const nouvelleReservation: Reservation = {
+			id: Date.now(),
+			userId: 1,
+			chambreId: selectedRoom.id,
+			dateArrivee: dateArrivee,
+			dateDepart: dateDepart,
+			nombrePersonnes: Number(nombrePersonne),
+			statut: "en_attente",
+		};
+
+		ajouterReservation(nouvelleReservation);
+
 		setDateArrivee("");
 		setDateDepart("");
 		setNombrePersonne("");
