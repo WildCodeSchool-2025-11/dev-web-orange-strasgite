@@ -10,6 +10,7 @@ import {
 	Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 import {
 	type Reservation,
@@ -38,12 +39,14 @@ function ReservationModal({
 	const [dateDepart, setDateDepart] = useState<string>("");
 	const [nombrePersonne, setNombrePersonne] = useState<string>("");
 	const { ajouterReservation } = useReservations();
+	const { user } = useAuth();
 
 	const handleValiderReservation = () => {
 		if (!selectedRoom) return;
+		if (!user) return;
 		const nouvelleReservation: Reservation = {
 			id: Date.now(),
-			userId: 1,
+			userId: user.id,
 			chambreId: selectedRoom.id,
 			dateArrivee: dateArrivee,
 			dateDepart: dateDepart,
