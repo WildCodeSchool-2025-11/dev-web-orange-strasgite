@@ -20,8 +20,8 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
 import ReservationModal from "../components/ReservationModal";
 
 type Item = {
@@ -70,7 +70,7 @@ function RoomDetail() {
 
 	return (
 		<>
-			<Header />
+			<BurgerMenu />
 			<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh" }}>
 				{/* Container principal */}
 				<Container maxWidth="lg" sx={{ py: 4 }}>
