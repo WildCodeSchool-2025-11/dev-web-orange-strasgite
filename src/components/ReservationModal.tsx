@@ -78,11 +78,15 @@ function ReservationModal({
 		>
 			{/* Titre */}
 			<DialogTitle>
-				<Typography variant="h5" fontWeight="bold" color="#692817">
+				<Typography
+					variant="h5"
+					component="span"
+					fontWeight="bold"
+					color="#692817"
+				>
 					Réservation
 				</Typography>
 			</DialogTitle>
-
 			<Divider />
 
 			{/* Contenu */}

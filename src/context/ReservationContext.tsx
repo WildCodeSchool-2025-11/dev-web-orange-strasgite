@@ -22,7 +22,9 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
 	const [reservations, setReservations] = useState<Reservation[]>([]);
 
 	const ajouterReservation = (nouvelleReservation: Reservation) => {
-		setReservations([...reservations, nouvelleReservation]);
+		const updated = [...reservations, nouvelleReservation]; // ← Ajoute cette ligne
+		console.log("✅ Nouvelle réservation ajoutée :", updated); // ← Et celle-ci
+		setReservations(updated); // ← Remplace l'ancien setReservations
 	};
 	return (
 		<ReservationContext.Provider
