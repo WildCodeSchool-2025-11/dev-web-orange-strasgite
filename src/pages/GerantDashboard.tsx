@@ -2,9 +2,11 @@ import { useNavigate } from "react-router-dom";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import { useAuth } from "../context/AuthContext";
+import { useReservations } from "../context/ReservationContext";
 
 export default function GerantDashboard() {
 	const { user, logout } = useAuth();
+	const { reservations } = useReservations();
 	const navigate = useNavigate();
 
 	// Protection d'accès : uniquement pour les gérants
@@ -31,6 +33,24 @@ export default function GerantDashboard() {
 				<p style={{ marginBottom: "20px" }}>
 					Vous êtes connecté en tant que gérant.
 				</p>
+
+				<div style={{ marginTop: "30px" }}>
+					<h2>Toutes les réservations</h2>
+
+					{reservations.length === 0 ? (
+						<p>Aucune réservation pour le moment</p>
+					) : (
+						reservations.map((reservation) => (
+							<div key={reservation.id}>
+								<p> Chambre : {reservation.chambreId}</p>
+								<p> Arrivée : {reservation.dateArrivee}</p>
+								<p> Départ : {reservation.dateDepart}</p>
+								<p>Personnes : {reservation.nombrePersonnes}</p>
+								<p> Statut : {reservation.statut}</p>
+							</div>
+						))
+					)}
+				</div>
 
 				<button type="button" onClick={handleLogout}>
 					Se déconnecter et retourner à l'accueil
