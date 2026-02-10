@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
+import { useFavorites } from "../context/FavoritesContext";
 
 type Item = {
 	id: number;
@@ -27,16 +28,7 @@ type Item = {
 
 function Rooms() {
 	const [items, setItems] = useState<Item[]>([]);
-
-	const toggleFavorite = (chambreId: number) => {
-		const nouveauxItems = items.map((item) => {
-			if (item.id === chambreId) {
-				return { ...item, isFavorite: !item.isFavorite };
-			}
-			return item;
-		});
-		setItems(nouveauxItems);
-	};
+	const { toggleFavorite, isFavorite } = useFavorites();
 
 	// Mise en place du fetch
 	useEffect(() => {
@@ -102,19 +94,16 @@ function Rooms() {
 						>
 							{/* Bouton favori en position absolue */}
 							<IconButton
-								onClick={() => toggleFavorite(item.id)}
-								sx={{
-									position: "absolute",
-									top: 8,
-									right: 8,
-									backgroundColor: "rgba(255, 255, 255, 0.9)",
-									zIndex: 1,
-									"&:hover": {
-										backgroundColor: "rgba(255, 255, 255, 1)",
-									},
-								}}
+								onClick={() =>
+									toggleFavorite({
+										id: item.id.toString(),
+										name: item.nom,
+										price: item.prix_par_nuit,
+										image: item.images_urls[0],
+									})
+								}
 							>
-								{item.isFavorite ? (
+								{isFavorite(item.id.toString()) ? (
 									<Favorite sx={{ color: "#e63946" }} />
 								) : (
 									<FavoriteBorder />
