@@ -22,6 +22,7 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
 	const [favorites, setFavorites] = useState<Room[]>([]);
+	const [isFirstRender, setIsFirstRender] = useState(true);
 
 	useEffect(() => {
 		const savedFavorites = localStorage.getItem("strasgite-favorites");
@@ -32,11 +33,13 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 				console.error("Erreur lors du chargement des favoris:", error);
 			}
 		}
+		setIsFirstRender(false);
 	}, []);
 
 	useEffect(() => {
+		if (isFirstRender) return;
 		localStorage.setItem("strasgite-favorites", JSON.stringify(favorites));
-	}, [favorites]);
+	}, [favorites, isFirstRender]);
 
 	const addToFavorites = (room: Room) => {
 		setFavorites((prev) => {

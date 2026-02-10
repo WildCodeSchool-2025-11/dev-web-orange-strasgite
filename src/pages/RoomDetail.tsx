@@ -20,6 +20,7 @@ import {
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import AccountAvatar from "../components/AccountAvatar";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import ReservationModal from "../components/ReservationModal";
@@ -70,6 +71,7 @@ function RoomDetail() {
 
 	return (
 		<>
+			<AccountAvatar />
 			<BurgerMenu />
 			<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh" }}>
 				{/* Container principal */}
