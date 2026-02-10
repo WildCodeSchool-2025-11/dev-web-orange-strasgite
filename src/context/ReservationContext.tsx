@@ -1,5 +1,10 @@
-import { createContext, type ReactNode, useContext, useState } from "react";
-
+import {
+	createContext,
+	type ReactNode,
+	useContext,
+	useEffect,
+	useState,
+} from "react";
 export type Reservation = {
 	id: number;
 	userId: number;
@@ -21,10 +26,23 @@ const ReservationContext = createContext<ReservationContextType | undefined>(
 export function ReservationProvider({ children }: { children: ReactNode }) {
 	const [reservations, setReservations] = useState<Reservation[]>([]);
 
+	useEffect(() => {
+		const storedReservations = localStorage.getItem("reservations");
+
+		if (storedReservations) {
+			setReservations(JSON.parse(storedReservations));
+		}
+	}, []);
+
+	const saveReservations = (list: Reservation[]) => {
+		setReservations(list);
+		localStorage.setItem("reservations", JSON.stringify(list));
+	};
+
 	const ajouterReservation = (nouvelleReservation: Reservation) => {
-		const updated = [...reservations, nouvelleReservation]; // ← Ajoute cette ligne
-		console.log("✅ Nouvelle réservation ajoutée :", updated); // ← Et celle-ci
-		setReservations(updated); // ← Remplace l'ancien setReservations
+		const updated = [...reservations, nouvelleReservation];
+		console.log("✅ Nouvelle réservation ajoutée :", updated);
+		saveReservations(updated);
 	};
 	return (
 		<ReservationContext.Provider
