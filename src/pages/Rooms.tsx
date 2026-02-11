@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import contactImage from "../assets/images/dormir.jpg";
+import AccountAvatar from "../components/AccountAvatar";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import PageHero from "../components/PageHero/PageHero";
@@ -46,6 +47,7 @@ function Rooms() {
 		<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh" }}>
 			{/* Header avec AccountAvatar et BurgerMenu */}
 			<div className="home-header">
+				<AccountAvatar />
 				<BurgerMenu />
 			</div>
 
