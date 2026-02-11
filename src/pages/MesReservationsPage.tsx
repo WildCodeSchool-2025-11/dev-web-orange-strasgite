@@ -1,5 +1,6 @@
 import {
 	AccessTime,
+	ArrowBack,
 	CalendarMonth,
 	CheckCircle,
 	DeleteForever,
@@ -23,6 +24,7 @@ import {
 	Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import HeaderClient from "../components/Header-client";
 import { useAuth } from "../context/AuthContext";
@@ -31,6 +33,7 @@ import { useReservations } from "../context/ReservationContext";
 export default function MesReservationsPage() {
 	const { user } = useAuth();
 	const { reservations } = useReservations();
+	const navigate = useNavigate();
 	const [filtreStatut, setFiltreStatut] = useState<string>("all");
 	const [openDialog, setOpenDialog] = useState(false);
 
@@ -113,6 +116,19 @@ export default function MesReservationsPage() {
 	return (
 		<>
 			<HeaderClient />
+			<Button
+				startIcon={<ArrowBack />}
+				onClick={() => navigate("/rooms")}
+				sx={{
+					mb: 3,
+					color: "#692817",
+					"&:hover": {
+						backgroundColor: "rgba(105, 40, 23, 0.08)",
+					},
+				}}
+			>
+				Retour aux chambres
+			</Button>
 			<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh", py: 4 }}>
 				<Container maxWidth="lg">
 					{/* En-tête */}
