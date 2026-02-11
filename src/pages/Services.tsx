@@ -27,18 +27,23 @@ export default function Services() {
 							alt="Petit-déjeuner StrasGite"
 							className="service-image"
 						/>
-						<h3>Petit-déjeuner</h3>
+						<h3>Petit-déjeuner Alsacien</h3>
 						<p>Produits frais, locaux et faits maison.</p>
+						<p>Bretzel, Kougelhopf et charcuterie Alsacienne.</p>
 					</div>
 
 					<div className="service-card">
 						<img
-							src="/images/services/wifi.png"
+							src="/images/services/bureau.png"
 							alt="Wi-Fi haut débit"
 							className="service-image"
 						/>
-						<h3>Wi-Fi Haut Débit</h3>
-						<p>Connexion rapide et stable dans toute la maison.</p>
+						<h3>Accès parlementaires</h3>
+						<p>Lieu confidentiel dédié aux travaux et rencontres des élus.</p>
+						<p>
+							Structure d’accueil pour réunions, séminaires et séjours
+							institutionnels.
+						</p>
 					</div>
 
 					<div className="service-card">
@@ -48,9 +53,11 @@ export default function Services() {
 							className="service-image"
 						/>
 						<h3>Parking Privé</h3>
-						<p>Stationnement sécurisé à proximité immédiate.</p>
+						<p>
+							Parking privé et sécurisé proposant un service de location pour
+							faciliter les déplacements des clients.
+						</p>
 					</div>
-
 					<div className="service-card">
 						<img
 							src="/images/services/jardin.png"
@@ -58,7 +65,34 @@ export default function Services() {
 							className="service-image"
 						/>
 						<h3>Jardin fleuri</h3>
-						<p>Profitez du calme dans notre jardin verdoyant jusqu'à 23h.</p>
+						<p>
+							Jardin fleuri privé aménagé avec terrasse, espaces de détente et
+							coin petit-déjeuner en plein air.
+						</p>
+					</div>
+					<div className="service-card">
+						<img
+							src="/images/services/checkin.jpg"
+							alt="check-in"
+							className="service-image"
+						/>
+						<h3>Check-in Check-out flexible</h3>
+						<p>
+							Check-in et check-out adaptables pour plus de liberté pendant
+							votre séjour
+						</p>
+					</div>
+					<div className="service-card">
+						<img
+							src="/images/services/conciergerie.png"
+							alt="concieregerie"
+							className="service-image"
+						/>
+						<h3>Conciergerie</h3>
+						<p>
+							service de conciergerie personnalisé. Réservation de restaurants,
+							organisation d'activités, courses à domicile..
+						</p>
 					</div>
 				</section>
 			</div>
