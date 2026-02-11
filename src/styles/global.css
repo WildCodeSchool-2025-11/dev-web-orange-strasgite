@@ -365,8 +365,6 @@ header {
 
 /* pages/MentionsLegalesPage.css */
 .mentions-container {
-	grid-template-columns: auto;
-	gap: 2;
 	max-width: 800px;
 	margin: 50px auto;
 	padding: 0 20px;

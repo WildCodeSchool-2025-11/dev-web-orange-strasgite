@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import { FavoritesProvider } from "./context/FavoritesContext";
-
 import Contact from "./pages/Contact";
 import GerantDashboard from "./pages/GerantDashboard";
 import Home from "./pages/Home";
