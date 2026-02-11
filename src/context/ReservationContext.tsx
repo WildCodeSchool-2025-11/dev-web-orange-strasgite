@@ -18,6 +18,7 @@ export type Reservation = {
 type ReservationContextType = {
 	reservations: Reservation[];
 	ajouterReservation: (nouvelleReservation: Reservation) => void;
+	viderReservations: () => void;
 };
 const ReservationContext = createContext<ReservationContextType | undefined>(
 	undefined,
@@ -44,11 +45,16 @@ export function ReservationProvider({ children }: { children: ReactNode }) {
 		console.log("✅ Nouvelle réservation ajoutée :", updated);
 		saveReservations(updated);
 	};
+	const viderReservations = () => {
+		setReservations([]);
+		localStorage.removeItem("reservations");
+	};
 	return (
 		<ReservationContext.Provider
 			value={{
 				reservations: reservations,
 				ajouterReservation: ajouterReservation,
+				viderReservations,
 			}}
 		>
 			{children}
