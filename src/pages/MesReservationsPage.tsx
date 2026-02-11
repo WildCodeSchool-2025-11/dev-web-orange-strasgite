@@ -2,51 +2,37 @@ import {
 	AccessTime,
 	CalendarMonth,
 	CheckCircle,
+	DeleteForever,
 	ErrorOutline,
 	People,
 } from "@mui/icons-material";
 import {
 	Box,
+	Button,
 	Card,
 	CardContent,
-	CardMedia,
 	Chip,
 	Container,
-	Skeleton,
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogContentText,
+	DialogTitle,
 	ToggleButton,
 	ToggleButtonGroup,
 	Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Footer from "../components/Footer";
 import HeaderClient from "../components/Header-client";
 import { useAuth } from "../context/AuthContext";
 import { useReservations } from "../context/ReservationContext";
 
-type Chambre = {
-	id: number;
-	nom: string;
-	images_urls: string[];
-	prix_par_nuit: number;
-};
-
 export default function MesReservationsPage() {
 	const { user } = useAuth();
 	const { reservations } = useReservations();
 	const [filtreStatut, setFiltreStatut] = useState<string>("all");
-	const [chambres, setChambres] = useState<Chambre[]>([]);
-
-	// Fetch des chambres depuis l'API
-	useEffect(() => {
-		fetch("https://api-projet-2-strasgite.vercel.app/api/chambres")
-			.then((res) => res.json())
-			.then((data) => setChambres(data))
-			.catch((err) => console.error("Erreur fetch chambres:", err));
-	}, []);
-
-	// Helper pour trouver une chambre par son id
-	const getChambre = (chambreId: number) =>
-		chambres.find((c) => c.id === chambreId);
+	const [openDialog, setOpenDialog] = useState(false);
 
 	if (!user) {
 		return (
@@ -76,11 +62,25 @@ export default function MesReservationsPage() {
 		(reservation) => reservation.userId === user.id,
 	);
 
+	// Filtrer par statut
 	const reservationsFiltrees =
 		filtreStatut === "all"
 			? mesReservations
 			: mesReservations.filter((r) => r.statut === filtreStatut);
 
+	// Fonction pour supprimer l'historique
+	const supprimerHistorique = () => {
+		// Garder uniquement les réservations des autres utilisateurs
+		const autresReservations = reservations.filter(
+			(reservation) => reservation.userId !== user.id,
+		);
+		// Mettre à jour le localStorage
+		localStorage.setItem("reservations", JSON.stringify(autresReservations));
+		// Recharger la page pour rafraîchir le contexte
+		window.location.reload();
+	};
+
+	// Fonction pour obtenir la couleur et l'icône selon le statut
 	const getStatutInfo = (statut: string) => {
 		switch (statut) {
 			case "validee":
@@ -115,20 +115,50 @@ export default function MesReservationsPage() {
 			<HeaderClient />
 			<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh", py: 4 }}>
 				<Container maxWidth="lg">
-					<Box sx={{ mb: 4 }}>
-						<Typography
-							variant="h3"
-							component="h1"
-							fontWeight="bold"
-							sx={{ color: "#692817", mb: 1 }}
-						>
-							Mes réservations
-						</Typography>
-						<Typography variant="body1" color="text.secondary">
-							Gérez et consultez toutes vos réservations
-						</Typography>
+					{/* En-tête */}
+					<Box
+						sx={{
+							mb: 4,
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "flex-start",
+							flexWrap: "wrap",
+							gap: 2,
+						}}
+					>
+						<Box>
+							<Typography
+								variant="h3"
+								component="h1"
+								fontWeight="bold"
+								sx={{ color: "#692817", mb: 1 }}
+							>
+								Mes réservations
+							</Typography>
+							<Typography variant="body1" color="text.secondary">
+								Gérez et consultez toutes vos réservations
+							</Typography>
+						</Box>
+
+						{/* Bouton Supprimer l'historique */}
+						{mesReservations.length > 0 && (
+							<Button
+								variant="outlined"
+								color="error"
+								startIcon={<DeleteForever />}
+								onClick={() => setOpenDialog(true)}
+								sx={{
+									borderRadius: 2,
+									textTransform: "none",
+									fontWeight: "bold",
+								}}
+							>
+								Supprimer l'historique
+							</Button>
+						)}
 					</Box>
 
+					{/* Filtres par statut */}
 					<Box
 						sx={{
 							mb: 4,
@@ -141,7 +171,9 @@ export default function MesReservationsPage() {
 							value={filtreStatut}
 							exclusive
 							onChange={(_, newValue) => {
-								if (newValue !== null) setFiltreStatut(newValue);
+								if (newValue !== null) {
+									setFiltreStatut(newValue);
+								}
 							}}
 							sx={{
 								backgroundColor: "white",
@@ -156,12 +188,14 @@ export default function MesReservationsPage() {
 						</ToggleButtonGroup>
 					</Box>
 
+					{/* Compteur */}
 					<Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
 						{reservationsFiltrees.length} réservation
 						{reservationsFiltrees.length > 1 ? "s" : ""} trouvée
 						{reservationsFiltrees.length > 1 ? "s" : ""}
 					</Typography>
 
+					{/* Liste des réservations */}
 					{reservationsFiltrees.length === 0 ? (
 						<Card
 							sx={{
@@ -195,15 +229,12 @@ export default function MesReservationsPage() {
 						>
 							{reservationsFiltrees.map((reservation) => {
 								const statutInfo = getStatutInfo(reservation.statut);
-								const chambre = getChambre(reservation.chambreId);
 
 								return (
 									<Card
 										key={reservation.id}
 										sx={{
 											height: "100%",
-											display: "flex",
-											flexDirection: "column",
 											borderRadius: 3,
 											boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
 											transition: "transform 0.2s, box-shadow 0.2s",
@@ -214,21 +245,8 @@ export default function MesReservationsPage() {
 											border: "1px solid #f0f0f0",
 										}}
 									>
-										{/* Photo de la chambre */}
-										{chambre ? (
-											<CardMedia
-												component="img"
-												height="200"
-												image={chambre.images_urls[0]}
-												alt={chambre.nom}
-												sx={{ objectFit: "cover" }}
-											/>
-										) : (
-											<Skeleton variant="rectangular" height={200} />
-										)}
-
-										<CardContent sx={{ p: 3, flexGrow: 1 }}>
-											{/* Statut */}
+										<CardContent sx={{ p: 3 }}>
+											{/* Statut en haut */}
 											<Box
 												sx={{
 													display: "flex",
@@ -244,31 +262,18 @@ export default function MesReservationsPage() {
 													sx={{ fontWeight: "bold" }}
 												/>
 												<Typography variant="caption" color="text.secondary">
-													#{reservation.id}
+													Réservation #{reservation.id}
 												</Typography>
 											</Box>
 
-											{/* Nom de la chambre */}
+											{/* Chambre */}
 											<Typography
 												variant="h6"
 												fontWeight="bold"
-												sx={{ mb: 0.5, color: "#692817" }}
+												sx={{ mb: 2, color: "#692817" }}
 											>
-												{chambre
-													? chambre.nom
-													: `Chambre ${reservation.chambreId}`}
+												Chambre {reservation.chambreId}
 											</Typography>
-
-											{/* Prix */}
-											{chambre && (
-												<Typography
-													variant="body2"
-													color="text.secondary"
-													sx={{ mb: 2 }}
-												>
-													{chambre.prix_par_nuit} € / nuit
-												</Typography>
-											)}
 
 											{/* Dates */}
 											<Box sx={{ mb: 2 }}>
@@ -281,7 +286,7 @@ export default function MesReservationsPage() {
 													}}
 												>
 													<CalendarMonth
-														sx={{ fontSize: 18, color: "#e6b09b" }}
+														sx={{ fontSize: 20, color: "#e6b09b" }}
 													/>
 													<Typography variant="body2" fontWeight="medium">
 														Arrivée :
@@ -300,7 +305,7 @@ export default function MesReservationsPage() {
 													sx={{ display: "flex", alignItems: "center", gap: 1 }}
 												>
 													<CalendarMonth
-														sx={{ fontSize: 18, color: "#e6b09b" }}
+														sx={{ fontSize: 20, color: "#e6b09b" }}
 													/>
 													<Typography variant="body2" fontWeight="medium">
 														Départ :
@@ -317,13 +322,13 @@ export default function MesReservationsPage() {
 												</Box>
 											</Box>
 
-											{/* Personnes */}
+											{/* Nombre de personnes */}
 											<Box
 												sx={{
 													display: "flex",
 													alignItems: "center",
 													gap: 1,
-													p: 1.5,
+													p: 2,
 													backgroundColor: "#f9f9f9",
 													borderRadius: 2,
 												}}
@@ -341,6 +346,48 @@ export default function MesReservationsPage() {
 						</Box>
 					)}
 				</Container>
+
+				{/* Dialog de confirmation */}
+				<Dialog
+					open={openDialog}
+					onClose={() => setOpenDialog(false)}
+					PaperProps={{
+						sx: {
+							borderRadius: 3,
+							p: 1,
+						},
+					}}
+				>
+					<DialogTitle sx={{ fontWeight: "bold", color: "#692817" }}>
+						Confirmer la suppression
+					</DialogTitle>
+					<DialogContent>
+						<DialogContentText>
+							Êtes-vous sûr de vouloir supprimer tout votre historique de
+							réservations ? Cette action est irréversible.
+						</DialogContentText>
+					</DialogContent>
+					<DialogActions sx={{ p: 2, gap: 1 }}>
+						<Button
+							onClick={() => setOpenDialog(false)}
+							variant="outlined"
+							sx={{ borderRadius: 2 }}
+						>
+							Annuler
+						</Button>
+						<Button
+							onClick={() => {
+								supprimerHistorique();
+								setOpenDialog(false);
+							}}
+							variant="contained"
+							color="error"
+							sx={{ borderRadius: 2 }}
+						>
+							Supprimer
+						</Button>
+					</DialogActions>
+				</Dialog>
 			</Box>
 			<Footer />
 		</>
