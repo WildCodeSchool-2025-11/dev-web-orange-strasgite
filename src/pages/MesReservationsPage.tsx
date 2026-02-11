@@ -9,22 +9,44 @@ import {
 	Box,
 	Card,
 	CardContent,
+	CardMedia,
 	Chip,
 	Container,
+	Skeleton,
 	ToggleButton,
 	ToggleButtonGroup,
 	Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../components/Footer";
 import HeaderClient from "../components/Header-client";
 import { useAuth } from "../context/AuthContext";
 import { useReservations } from "../context/ReservationContext";
 
+type Chambre = {
+	id: number;
+	nom: string;
+	images_urls: string[];
+	prix_par_nuit: number;
+};
+
 export default function MesReservationsPage() {
 	const { user } = useAuth();
 	const { reservations } = useReservations();
 	const [filtreStatut, setFiltreStatut] = useState<string>("all");
+	const [chambres, setChambres] = useState<Chambre[]>([]);
+
+	// Fetch des chambres depuis l'API
+	useEffect(() => {
+		fetch("https://api-projet-2-strasgite.vercel.app/api/chambres")
+			.then((res) => res.json())
+			.then((data) => setChambres(data))
+			.catch((err) => console.error("Erreur fetch chambres:", err));
+	}, []);
+
+	// Helper pour trouver une chambre par son id
+	const getChambre = (chambreId: number) =>
+		chambres.find((c) => c.id === chambreId);
 
 	if (!user) {
 		return (
@@ -54,13 +76,11 @@ export default function MesReservationsPage() {
 		(reservation) => reservation.userId === user.id,
 	);
 
-	// Filtrer par statut
 	const reservationsFiltrees =
 		filtreStatut === "all"
 			? mesReservations
 			: mesReservations.filter((r) => r.statut === filtreStatut);
 
-	// Fonction pour obtenir la couleur et l'icône selon le statut
 	const getStatutInfo = (statut: string) => {
 		switch (statut) {
 			case "validee":
@@ -95,7 +115,6 @@ export default function MesReservationsPage() {
 			<HeaderClient />
 			<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh", py: 4 }}>
 				<Container maxWidth="lg">
-					{/* En-tête */}
 					<Box sx={{ mb: 4 }}>
 						<Typography
 							variant="h3"
@@ -110,7 +129,6 @@ export default function MesReservationsPage() {
 						</Typography>
 					</Box>
 
-					{/* Filtres par statut */}
 					<Box
 						sx={{
 							mb: 4,
@@ -123,9 +141,7 @@ export default function MesReservationsPage() {
 							value={filtreStatut}
 							exclusive
 							onChange={(_, newValue) => {
-								if (newValue !== null) {
-									setFiltreStatut(newValue);
-								}
+								if (newValue !== null) setFiltreStatut(newValue);
 							}}
 							sx={{
 								backgroundColor: "white",
@@ -140,14 +156,12 @@ export default function MesReservationsPage() {
 						</ToggleButtonGroup>
 					</Box>
 
-					{/* Compteur */}
 					<Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
 						{reservationsFiltrees.length} réservation
 						{reservationsFiltrees.length > 1 ? "s" : ""} trouvée
 						{reservationsFiltrees.length > 1 ? "s" : ""}
 					</Typography>
 
-					{/* Liste des réservations */}
 					{reservationsFiltrees.length === 0 ? (
 						<Card
 							sx={{
@@ -181,12 +195,15 @@ export default function MesReservationsPage() {
 						>
 							{reservationsFiltrees.map((reservation) => {
 								const statutInfo = getStatutInfo(reservation.statut);
+								const chambre = getChambre(reservation.chambreId);
 
 								return (
 									<Card
 										key={reservation.id}
 										sx={{
 											height: "100%",
+											display: "flex",
+											flexDirection: "column",
 											borderRadius: 3,
 											boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
 											transition: "transform 0.2s, box-shadow 0.2s",
@@ -197,8 +214,21 @@ export default function MesReservationsPage() {
 											border: "1px solid #f0f0f0",
 										}}
 									>
-										<CardContent sx={{ p: 3 }}>
-											{/* Statut en haut */}
+										{/* Photo de la chambre */}
+										{chambre ? (
+											<CardMedia
+												component="img"
+												height="200"
+												image={chambre.images_urls[0]}
+												alt={chambre.nom}
+												sx={{ objectFit: "cover" }}
+											/>
+										) : (
+											<Skeleton variant="rectangular" height={200} />
+										)}
+
+										<CardContent sx={{ p: 3, flexGrow: 1 }}>
+											{/* Statut */}
 											<Box
 												sx={{
 													display: "flex",
@@ -214,18 +244,31 @@ export default function MesReservationsPage() {
 													sx={{ fontWeight: "bold" }}
 												/>
 												<Typography variant="caption" color="text.secondary">
-													Réservation #{reservation.id}
+													#{reservation.id}
 												</Typography>
 											</Box>
 
-											{/* Chambre */}
+											{/* Nom de la chambre */}
 											<Typography
 												variant="h6"
 												fontWeight="bold"
-												sx={{ mb: 2, color: "#692817" }}
+												sx={{ mb: 0.5, color: "#692817" }}
 											>
-												Chambre {reservation.chambreId}
+												{chambre
+													? chambre.nom
+													: `Chambre ${reservation.chambreId}`}
 											</Typography>
+
+											{/* Prix */}
+											{chambre && (
+												<Typography
+													variant="body2"
+													color="text.secondary"
+													sx={{ mb: 2 }}
+												>
+													{chambre.prix_par_nuit} € / nuit
+												</Typography>
+											)}
 
 											{/* Dates */}
 											<Box sx={{ mb: 2 }}>
@@ -238,7 +281,7 @@ export default function MesReservationsPage() {
 													}}
 												>
 													<CalendarMonth
-														sx={{ fontSize: 20, color: "#e6b09b" }}
+														sx={{ fontSize: 18, color: "#e6b09b" }}
 													/>
 													<Typography variant="body2" fontWeight="medium">
 														Arrivée :
@@ -257,7 +300,7 @@ export default function MesReservationsPage() {
 													sx={{ display: "flex", alignItems: "center", gap: 1 }}
 												>
 													<CalendarMonth
-														sx={{ fontSize: 20, color: "#e6b09b" }}
+														sx={{ fontSize: 18, color: "#e6b09b" }}
 													/>
 													<Typography variant="body2" fontWeight="medium">
 														Départ :
@@ -274,13 +317,13 @@ export default function MesReservationsPage() {
 												</Box>
 											</Box>
 
-											{/* Nombre de personnes */}
+											{/* Personnes */}
 											<Box
 												sx={{
 													display: "flex",
 													alignItems: "center",
 													gap: 1,
-													p: 2,
+													p: 1.5,
 													backgroundColor: "#f9f9f9",
 													borderRadius: 2,
 												}}
