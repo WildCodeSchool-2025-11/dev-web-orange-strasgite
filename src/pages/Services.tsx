@@ -1,10 +1,10 @@
 import contactImage from "../assets/images/service.jpg";
+import AccountAvatar from "../components/AccountAvatar";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import PageHero from "../components/PageHero/PageHero";
 import "../styles/Services.css";
 import "../styles/global.css";
-import AccountAvatar from "../components/AccountAvatar";
 
 export default function Services() {
 	return (
