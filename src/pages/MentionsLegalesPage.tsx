@@ -1,7 +1,11 @@
+import { ArrowBack } from "@mui/icons-material";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import "../styles/global.css";
 
-import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 export default function MentionsLegalesPage() {
+	const navigate = useNavigate();
 	return (
 		<>
 			<div className="home-header">
@@ -9,6 +13,19 @@ export default function MentionsLegalesPage() {
 			</div>
 
 			<div className="mentions-container">
+				<Button
+					startIcon={<ArrowBack />}
+					onClick={() => navigate("/")}
+					sx={{
+						mb: 3,
+						color: "#692817",
+						"&:hover": {
+							backgroundColor: "rgba(105, 40, 23, 0.08)",
+						},
+					}}
+				>
+					Retour à l'accueil
+				</Button>
 				<h1>CGU - Mentions légales - Cookies</h1>
 				<h2>En vigueur au 01/01/2026</h2>
 				<p>
