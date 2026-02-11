@@ -2,6 +2,7 @@ import {
 	CalendarMonth,
 	CheckCircle,
 	Close,
+	DeleteForever,
 	ErrorOutline,
 	HourglassEmpty,
 	Logout,
@@ -46,7 +47,7 @@ import {
 
 export default function GerantDashboard() {
 	const { user, logout } = useAuth();
-	const { reservations } = useReservations();
+	const { reservations, viderReservations } = useReservations();
 	const navigate = useNavigate();
 	const [localReservations, setLocalReservations] = useState(reservations);
 
@@ -89,32 +90,26 @@ export default function GerantDashboard() {
 		refusees: localReservations.filter((r) => r.statut === "refusee").length,
 	};
 
-	// Données pour le graphique (répartition par statut)
+	// Données pour le graphique
 	const chartData = [
-		{
-			name: "En attente",
-			nombre: stats.enAttente,
-			fill: "#ff9800",
-		},
-		{
-			name: "Validées",
-			nombre: stats.validees,
-			fill: "#4caf50",
-		},
-		{
-			name: "Refusées",
-			nombre: stats.refusees,
-			fill: "#f44336",
-		},
+		{ name: "En attente", nombre: stats.enAttente, fill: "#ff9800" },
+		{ name: "Validées", nombre: stats.validees, fill: "#4caf50" },
+		{ name: "Refusées", nombre: stats.refusees, fill: "#f44336" },
 	];
 
-	// Actions pour changer le statut
+	// Changer le statut d'une réservation
 	const changerStatut = (id: number, nouveauStatut: Reservation["statut"]) => {
 		const updated = localReservations.map((r) =>
 			r.id === id ? { ...r, statut: nouveauStatut } : r,
 		);
 		setLocalReservations(updated);
-		// Mise à jour du localStorage
+		localStorage.setItem("reservations", JSON.stringify(updated));
+	};
+
+	// Supprimer une réservation individuelle
+	const supprimerReservation = (id: number) => {
+		const updated = localReservations.filter((r) => r.id !== id);
+		setLocalReservations(updated);
 		localStorage.setItem("reservations", JSON.stringify(updated));
 	};
 
@@ -137,7 +132,7 @@ export default function GerantDashboard() {
 			<BurgerMenu />
 			<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh", py: 4 }}>
 				<Container maxWidth="xl">
-					{/* En-tête avec bouton déconnexion */}
+					{/* En-tête avec boutons */}
 					<Box
 						sx={{
 							display: "flex",
@@ -159,21 +154,45 @@ export default function GerantDashboard() {
 								Bienvenue {user.name}
 							</Typography>
 						</Box>
-						<Button
-							variant="outlined"
-							startIcon={<Logout />}
-							onClick={handleLogout}
-							sx={{
-								borderColor: "#692817",
-								color: "#692817",
-								"&:hover": {
-									borderColor: "#d19a85",
-									backgroundColor: "rgba(105, 40, 23, 0.04)",
-								},
-							}}
-						>
-							Déconnexion
-						</Button>
+
+						{/* Boutons groupés à droite */}
+						<Box sx={{ display: "flex", gap: 2 }}>
+							{localReservations.length > 0 && (
+								<Button
+									variant="outlined"
+									startIcon={<DeleteForever />}
+									onClick={() => {
+										viderReservations();
+										setLocalReservations([]);
+									}}
+									sx={{
+										borderColor: "#f44336",
+										color: "#f44336",
+										"&:hover": {
+											borderColor: "#d32f2f",
+											backgroundColor: "rgba(244, 67, 54, 0.04)",
+										},
+									}}
+								>
+									Tout vider
+								</Button>
+							)}
+							<Button
+								variant="outlined"
+								startIcon={<Logout />}
+								onClick={handleLogout}
+								sx={{
+									borderColor: "#692817",
+									color: "#692817",
+									"&:hover": {
+										borderColor: "#d19a85",
+										backgroundColor: "rgba(105, 40, 23, 0.04)",
+									},
+								}}
+							>
+								Déconnexion
+							</Button>
+						</Box>
 					</Box>
 
 					{/* Cartes de statistiques */}
@@ -337,10 +356,7 @@ export default function GerantDashboard() {
 
 					{/* Tableau des réservations */}
 					<Card
-						sx={{
-							borderRadius: 3,
-							boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-						}}
+						sx={{ borderRadius: 3, boxShadow: "0 4px 12px rgba(0,0,0,0.08)" }}
 					>
 						<CardContent sx={{ p: 3 }}>
 							<Typography variant="h6" fontWeight="bold" sx={{ mb: 3 }}>
@@ -392,9 +408,7 @@ export default function GerantDashboard() {
 												return (
 													<TableRow
 														key={reservation.id}
-														sx={{
-															"&:hover": { backgroundColor: "#f5f5f5" },
-														}}
+														sx={{ "&:hover": { backgroundColor: "#f5f5f5" } }}
 													>
 														<TableCell>#{reservation.id}</TableCell>
 														<TableCell>User {reservation.userId}</TableCell>
@@ -420,7 +434,14 @@ export default function GerantDashboard() {
 															/>
 														</TableCell>
 														<TableCell align="center">
-															<Box sx={{ display: "flex", gap: 1 }}>
+															<Box
+																sx={{
+																	display: "flex",
+																	gap: 1,
+																	justifyContent: "center",
+																}}
+															>
+																{/* Valider */}
 																{reservation.statut !== "validee" && (
 																	<Tooltip title="Valider">
 																		<IconButton
@@ -440,6 +461,7 @@ export default function GerantDashboard() {
 																		</IconButton>
 																	</Tooltip>
 																)}
+																{/* Refuser */}
 																{reservation.statut !== "refusee" && (
 																	<Tooltip title="Refuser">
 																		<IconButton
@@ -459,6 +481,24 @@ export default function GerantDashboard() {
 																		</IconButton>
 																	</Tooltip>
 																)}
+																{/* Supprimer */}
+																<Tooltip title="Supprimer">
+																	<IconButton
+																		size="small"
+																		onClick={() =>
+																			supprimerReservation(reservation.id)
+																		}
+																		sx={{
+																			color: "#9e9e9e",
+																			"&:hover": {
+																				backgroundColor:
+																					"rgba(158, 158, 158, 0.1)",
+																			},
+																		}}
+																	>
+																		<DeleteForever />
+																	</IconButton>
+																</Tooltip>
 															</Box>
 														</TableCell>
 													</TableRow>
