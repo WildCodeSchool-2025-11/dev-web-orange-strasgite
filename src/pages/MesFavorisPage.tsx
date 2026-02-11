@@ -1,41 +1,57 @@
-import { FavoriteBorder } from "@mui/icons-material";
-import { Box, Button, Card, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { ArrowBack, FavoriteBorder } from "@mui/icons-material";
+import { Box, Button, Card, Container, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import HeaderClient from "../components/Header-client";
 import { useFavorites } from "../context/FavoritesContext";
 
 export default function MesFavorisPage() {
 	const { favorites, removeFromFavorites } = useFavorites();
+	const navigate = useNavigate();
 
 	return (
 		<>
 			<HeaderClient />
-			<div className="favorites-page">
-				<Typography variant="h3" fontWeight="bold" sx={{ color: "#692817" }}>
-					Mes favoris
-				</Typography>
-				<Typography variant="body1" color="text.secondary">
-					{favorites.length} chambre{favorites.length > 1 ? "s" : ""} en favori
-					{favorites.length > 1 ? "s" : ""}
-				</Typography>
-
-				{favorites.length === 0 ? (
-					<Box
+			<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh", py: 4 }}>
+				<Container maxWidth="lg">
+					{/* Bouton retour */}
+					<Button
+						startIcon={<ArrowBack />}
+						onClick={() => navigate("/rooms")}
 						sx={{
-							display: "flex",
-							justifyContent: "center",
-							alignItems: "center",
-							minHeight: "50vh",
+							mb: 3,
+							color: "#692817",
+							"&:hover": {
+								backgroundColor: "rgba(105, 40, 23, 0.08)",
+							},
 						}}
 					>
+						Retour aux chambres
+					</Button>
+
+					{/* En-tête */}
+					<Box sx={{ mb: 4 }}>
+						<Typography
+							variant="h3"
+							component="h1"
+							fontWeight="bold"
+							sx={{ color: "#692817", mb: 1 }}
+						>
+							Mes favoris
+						</Typography>
+						<Typography variant="body1" color="text.secondary">
+							{favorites.length} chambre{favorites.length > 1 ? "s" : ""} en
+							favori{favorites.length > 1 ? "s" : ""}
+						</Typography>
+					</Box>
+
+					{favorites.length === 0 ? (
 						<Card
 							sx={{
 								p: 6,
 								textAlign: "center",
 								backgroundColor: "white",
 								borderRadius: 3,
-								maxWidth: 500,
 								boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
 							}}
 						>
@@ -66,31 +82,30 @@ export default function MesFavorisPage() {
 								</Button>
 							</Link>
 						</Card>
-					</Box>
-				) : (
-					<div className="favorites-grid">
-						{favorites.map((room) => (
-							<div key={room.id} className="favorite-card">
-								<img src={room.image} alt={room.name} />
-								<h3>{room.name}</h3>
-								<p>{room.price}€ / nuit</p>
+					) : (
+						<div className="favorites-grid">
+							{favorites.map((room) => (
+								<div key={room.id} className="favorite-card">
+									<img src={room.image} alt={room.name} />
+									<h3>{room.name}</h3>
+									<p>{room.price}€ / nuit</p>
 
-								<div className="actions">
-									<button
-										type="button"
-										onClick={() => removeFromFavorites(room.id)}
-									>
-										Retirer des favoris
-									</button>
+									<div className="actions">
+										<button
+											type="button"
+											onClick={() => removeFromFavorites(room.id)}
+										>
+											Retirer des favoris
+										</button>
 
-									<a href={`/rooms/${room.id}`}>Voir les détails</a>
+										<a href={`/rooms/${room.id}`}>Voir les détails</a>
+									</div>
 								</div>
-							</div>
-						))}
-					</div>
-				)}
-			</div>
-
+							))}
+						</div>
+					)}
+				</Container>
+			</Box>
 			<Footer />
 		</>
 	);
