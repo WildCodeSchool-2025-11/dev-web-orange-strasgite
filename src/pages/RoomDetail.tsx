@@ -71,8 +71,20 @@ function RoomDetail() {
 
 	return (
 		<>
-			<AccountAvatar />
-			<BurgerMenu />
+			<Box
+				sx={{
+					backgroundColor: "#692817",
+					py: 2,
+					px: 3,
+					display: "flex",
+					justifyContent: "space-between",
+					alignItems: "center",
+				}}
+			>
+				<BurgerMenu />
+				<AccountAvatar />
+			</Box>
+
 			<Box sx={{ backgroundColor: "#f2e6d8", minHeight: "100vh" }}>
 				{/* Container principal */}
 				<Container maxWidth="lg" sx={{ py: 4 }}>
