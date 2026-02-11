@@ -12,6 +12,7 @@ import {
 	Button,
 	Card,
 	CardContent,
+	CardMedia,
 	Chip,
 	Container,
 	Dialog,
@@ -23,12 +24,19 @@ import {
 	ToggleButtonGroup,
 	Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import HeaderClient from "../components/Header-client";
 import { useAuth } from "../context/AuthContext";
 import { useReservations } from "../context/ReservationContext";
+
+type Chambre = {
+	id: number;
+	nom: string;
+	images_urls: string[];
+	prix_par_nuit: number;
+};
 
 export default function MesReservationsPage() {
 	const { user } = useAuth();
@@ -36,6 +44,15 @@ export default function MesReservationsPage() {
 	const navigate = useNavigate();
 	const [filtreStatut, setFiltreStatut] = useState<string>("all");
 	const [openDialog, setOpenDialog] = useState(false);
+
+	const [chambres, setChambres] = useState<Chambre[]>([]);
+
+	useEffect(() => {
+		fetch("https://api-projet-2-strasgite.vercel.app/api/chambres")
+			.then((res) => res.json())
+			.then((data) => setChambres(data))
+			.catch((err) => console.error("Erreur fetch chambres:", err));
+	}, []);
 
 	if (!user) {
 		return (
@@ -111,6 +128,11 @@ export default function MesReservationsPage() {
 					label: statut,
 				};
 		}
+	};
+
+	// Fonction pour obtenir les infos de la chambre
+	const getChambre = (chambreId: number) => {
+		return chambres.find((c) => c.id === chambreId);
 	};
 
 	return (
@@ -252,15 +274,29 @@ export default function MesReservationsPage() {
 										sx={{
 											height: "100%",
 											borderRadius: 3,
-											boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-											transition: "transform 0.2s, box-shadow 0.2s",
+											boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+											transition: "transform 0.3s ease, box-shadow 0.3s ease",
 											"&:hover": {
-												transform: "translateY(-4px)",
-												boxShadow: "0 8px 20px rgba(0,0,0,0.12)",
+												transform: "translateY(-8px)",
+												boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
 											},
 											border: "1px solid #f0f0f0",
+											overflow: "hidden",
 										}}
 									>
+										{/* Image de la chambre */}
+										{getChambre(reservation.chambreId) && (
+											<CardMedia
+												component="img"
+												height="200"
+												image={
+													getChambre(reservation.chambreId)?.images_urls[0]
+												}
+												alt={getChambre(reservation.chambreId)?.nom}
+												sx={{ objectFit: "cover" }}
+											/>
+										)}
+
 										<CardContent sx={{ p: 3 }}>
 											{/* Statut en haut */}
 											<Box
