@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
+
 import Newsletter from "./Newsletter";
 
 export default function Footer() {
@@ -85,13 +86,7 @@ export default function Footer() {
 			{/* Footer bottom */}
 			<div className="footerBottom">
 				<div className="footerLegal">
-					<a href="/mentions-legales">Mentions Légales</a>
-					<span className="separator">•</span>
-					<a href="/politique-confidentialite">Politique de confidentialité</a>
-					<span className="separator">•</span>
-					<a href="/politique-cookies">Politique de cookies</a>
-					<span className="separator">•</span>
-					<a href="/cgv">CGV</a>
+					<a href="/mentions-legales">Mentions Légales - CGU - Cookies</a>
 				</div>
 				<p className="footerCopyright">
 					© 2026 Strasgite - Tous droits réservés

@@ -4,6 +4,7 @@ import { FavoritesProvider } from "./context/FavoritesContext";
 import Contact from "./pages/Contact";
 import GerantDashboard from "./pages/GerantDashboard";
 import Home from "./pages/Home";
+import MentionsLegalesPage from "./pages/MentionsLegalesPage";
 import MesFavorisPage from "./pages/MesFavorisPage";
 import MesReservationsPage from "./pages/MesReservationsPage";
 import MonComptePage from "./pages/MonComptePage";
@@ -29,6 +30,7 @@ export default function App() {
 				<Route path="/mon-compte" element={<MonComptePage />} />
 				<Route path="/mes-reservations" element={<MesReservationsPage />} />
 				<Route path="/mes-favoris" element={<MesFavorisPage />} />
+				<Route path="/mentions-legales" element={<MentionsLegalesPage />} />
 			</Routes>
 		</FavoritesProvider>
 	);

@@ -245,6 +245,21 @@
 	fill: var(--couleur-accent);
 	flex-shrink: 0;
 }
+/* Styles pour rendre les images des attractions cliquables */
+
+.image-attraction-link {
+	display: block;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.image-attraction-link .image-attraction {
+	transition: opacity 0.3s ease;
+}
+
+.image-attraction-link:hover .image-attraction {
+	opacity: 0.9;
+}
 
 /* ===================================
    ANIMATIONS AU SCROLL

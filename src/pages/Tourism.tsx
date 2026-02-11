@@ -1,11 +1,15 @@
 import { useEffect } from "react";
+
 import strasbourgImage from "../assets/images/strasbourg.jpg";
+import AccountAvatar from "../components/AccountAvatar";
 import BurgerMenu from "../components/BurgerMenu/BurgerMenu";
 import Footer from "../components/Footer";
 import PageHero from "../components/PageHero/PageHero";
 import { attractions } from "../data/attractionsData";
-import "../styles/Tourism.css";
 import type { Attraction } from "../types/tourisme.types";
+import "../styles/global.css";
+import "../styles/Home.css";
+import "../styles/Tourism.css";
 
 const Tourism = () => {
 	useEffect(() => {
@@ -34,7 +38,8 @@ const Tourism = () => {
 	return (
 		<div className="page-tourisme">
 			{/* Header personnalisé avec BurgerMenu */}
-			<div className="tourisme-header">
+			<div className="home-header">
+				<AccountAvatar />
 				<BurgerMenu />
 			</div>
 
@@ -65,13 +70,19 @@ const Tourism = () => {
 							key={attraction.id}
 							className="carte-attraction fade-in-scroll"
 						>
-							<div
-								className="image-attraction"
-								style={{ backgroundImage: `url(${attraction.image})` }}
+							<a
+								href={attraction.url}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="image-attraction-link"
 							>
-								<div className="badge-categorie">{attraction.categorie}</div>
-							</div>
-
+								<div
+									className="image-attraction"
+									style={{ backgroundImage: `url(${attraction.image})` }}
+								>
+									<div className="badge-categorie">{attraction.categorie}</div>
+								</div>
+							</a>
 							<div className="contenu-attraction">
 								<h3>{attraction.titre}</h3>
 								<p>{attraction.description}</p>
