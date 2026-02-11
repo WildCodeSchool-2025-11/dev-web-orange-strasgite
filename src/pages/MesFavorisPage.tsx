@@ -12,7 +12,13 @@ export default function MesFavorisPage() {
 		<>
 			<HeaderClient />
 			<div className="favorites-page">
-				<h1>Mes favoris ({favorites.length})</h1>
+				<Typography variant="h3" fontWeight="bold" sx={{ color: "#692817" }}>
+					Mes favoris
+				</Typography>
+				<Typography variant="body1" color="text.secondary">
+					{favorites.length} chambre{favorites.length > 1 ? "s" : ""} en favori
+					{favorites.length > 1 ? "s" : ""}
+				</Typography>
 
 				{favorites.length === 0 ? (
 					<Box
