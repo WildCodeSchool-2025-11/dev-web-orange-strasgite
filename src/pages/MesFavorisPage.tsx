@@ -1,3 +1,6 @@
+import { FavoriteBorder } from "@mui/icons-material";
+import { Box, Button, Card, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import HeaderClient from "../components/Header-client";
 import { useFavorites } from "../context/FavoritesContext";
@@ -12,11 +15,52 @@ export default function MesFavorisPage() {
 				<h1>Mes favoris ({favorites.length})</h1>
 
 				{favorites.length === 0 ? (
-					<div className="empty-favorites">
-						<h2> Aucun favoris pour le moment</h2>
-						<p>Ajoutez des chambres à vos favoris depuis la page Chambres</p>
-						<a href="/rooms">Voir les chambres</a>
-					</div>
+					<Box
+						sx={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+							minHeight: "50vh",
+						}}
+					>
+						<Card
+							sx={{
+								p: 6,
+								textAlign: "center",
+								backgroundColor: "white",
+								borderRadius: 3,
+								maxWidth: 500,
+								boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+							}}
+						>
+							<FavoriteBorder sx={{ fontSize: 80, color: "#e6b09b", mb: 2 }} />
+							<Typography variant="h5" gutterBottom fontWeight="bold">
+								Aucun favori pour le moment
+							</Typography>
+							<Typography color="text.secondary" sx={{ mb: 3 }}>
+								Ajoutez des chambres à vos favoris depuis la page Chambres
+							</Typography>
+							<Link to="/rooms" style={{ textDecoration: "none" }}>
+								<Button
+									variant="contained"
+									sx={{
+										py: 1.5,
+										px: 4,
+										borderRadius: 2,
+										textTransform: "none",
+										fontSize: "1rem",
+										fontWeight: "bold",
+										backgroundColor: "#e6b09b",
+										"&:hover": {
+											backgroundColor: "#d19a85",
+										},
+									}}
+								>
+									Voir les chambres
+								</Button>
+							</Link>
+						</Card>
+					</Box>
 				) : (
 					<div className="favorites-grid">
 						{favorites.map((room) => (
