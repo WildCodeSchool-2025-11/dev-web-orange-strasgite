@@ -10,6 +10,7 @@ export const attractions: Attraction[] = [
 		image: "./src/assets/images/cathedrale.jpg",
 		lieu: "Place de la Cathédrale",
 		distance: "10 min à pied",
+		url: "https://www.cathedrale-strasbourg.fr/",
 	},
 	{
 		id: 2,
@@ -20,6 +21,7 @@ export const attractions: Attraction[] = [
 		image: "./src/assets/images/petitefrance.jpg",
 		lieu: "Quartier historique",
 		distance: "15 min à pied",
+		url: "https://www.visit.alsace/223007616-la-petite-france/",
 	},
 	{
 		id: 3,
@@ -30,6 +32,7 @@ export const attractions: Attraction[] = [
 		image: "./src/assets/images/palais.jpg",
 		lieu: "2 Place du Château",
 		distance: "8 min à pied",
+		url: "https://www.musees.strasbourg.eu/edition/-/entity/id/277882/Le+Palais+Rohan",
 	},
 	{
 		id: 4,
@@ -40,6 +43,7 @@ export const attractions: Attraction[] = [
 		image: "./src/assets/images/parlement.png",
 		lieu: "Quartier européen",
 		distance: "20 min en tram",
+		url: "https://www.europarl.europa.eu/visiting/fr/strasbourg",
 	},
 	{
 		id: 5,
@@ -50,6 +54,7 @@ export const attractions: Attraction[] = [
 		image: "./src/assets/images/PARC.jpg",
 		lieu: "Avenue de l'Europe",
 		distance: "25 min en tram",
+		url: "https://www.strasbourg.eu/lieu/-/entity/sig/2305_ENV_372/parc-de-l-orangerie",
 	},
 	{
 		id: 6,
@@ -60,5 +65,6 @@ export const attractions: Attraction[] = [
 		image: "./src/assets/images/noel.jpg",
 		lieu: "Centre-ville",
 		distance: "Nov-Déc uniquement",
+		url: "https://noel.strasbourg.eu/",
 	},
 ];

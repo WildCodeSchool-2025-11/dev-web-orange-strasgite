@@ -4,11 +4,13 @@ import Footer from "../components/Footer";
 import PageHero from "../components/PageHero/PageHero";
 import "../styles/Services.css";
 import "../styles/global.css";
+import AccountAvatar from "../components/AccountAvatar";
 
 export default function Services() {
 	return (
 		<main>
-			<div className="rooms-header">
+			<div className="home-header">
+				<AccountAvatar />
 				<BurgerMenu />
 			</div>
 			<PageHero
