@@ -1,26 +1,3 @@
-.hero {
-	height: 100vh;
-	width: 100%;
-	background-image: url("/images/maison-strasbourg.jpg");
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	position: relative;
-}
-
-.hero-overlay {
-	height: 100%;
-	width: 100%;
-	background: rgba(0, 0, 0, 0.4);
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: flex-end;
-	padding: 7rem 20rem;
-	color: #f2e6d8;
-	text-align: right;
-}
-
 .hero-title {
 	font-size: 4rem;
 	font-weight: 400;
@@ -48,8 +25,9 @@
 	margin-top: 1rem;
 }
 .heart {
-	color: #ff6b6b; /* rouge doux */
-	font-size: 2rem;
+	color: red;
+	margin-left: 0.25rem;
+	font-size: 1.2em;
 }
 .home-header {
 	position: absolute;

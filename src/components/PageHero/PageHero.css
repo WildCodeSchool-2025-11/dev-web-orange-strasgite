@@ -14,21 +14,6 @@
 	overflow: hidden;
 }
 
-.hero-section::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: radial-gradient(
-		circle at 30% 50%,
-		rgba(159, 127, 52, 0.5),
-		transparent 50%
-	);
-	animation: pulseGlow 8s ease-in-out infinite;
-}
-
 @keyframes pulseGlow {
 	0%,
 	100% {

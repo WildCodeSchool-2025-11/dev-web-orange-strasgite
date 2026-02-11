@@ -289,7 +289,6 @@ header {
 }
 .favorites-grid {
 	display: grid;
-	/* Crée des colonnes de 300px minimum, s'ajuste automatiquement */
 	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 	gap: 24px;
 	padding: 20px;
@@ -310,14 +309,12 @@ header {
 	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Style de l'image */
 .favorite-card img {
 	width: 100%;
 	height: 200px;
-	object-fit: cover; /* Évite de déformer l'image */
+	object-fit: cover;
 }
 
-/* Contenu textuel (titre et prix) */
 .favorite-card h3 {
 	margin: 16px 16px 8px;
 	font-size: 1.2rem;
@@ -330,16 +327,14 @@ header {
 	font-weight: bold;
 }
 
-/* Conteneur des boutons */
 .favorite-card .actions {
 	display: flex;
 	padding: 16px;
 	gap: 10px;
-	margin-top: auto; /* Pousse les boutons en bas si la carte est haute */
+	margin-top: auto;
 	border-top: 1px solid #eee;
 }
 
-/* Bouton Retirer */
 .favorite-card button {
 	background-color: #692817;
 	color: white;
@@ -355,7 +350,6 @@ header {
 	background-color: #d86a4b;
 }
 
-/* Lien Voir les détails */
 .favorite-card .actions a {
 	text-decoration: none;
 	color: #692817;
@@ -367,6 +361,34 @@ header {
 
 .favorite-card .actions a:hover {
 	text-decoration: underline;
+}
+
+/* pages/MentionsLegalesPage.css */
+.mentions-container {
+	grid-template-columns: auto;
+	gap: 2;
+	max-width: 800px;
+	margin: 50px auto;
+	padding: 0 20px;
+	font-family: Arial, sans-serif;
+	line-height: 1.6;
+	color: #333;
+}
+
+.mentions-container h1 {
+	color: #692817;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.mentions-container h2 {
+	color: #692817;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.mentions-container p {
+	margin-bottom: 15px;
 }
 
 @keyframes slideIn {

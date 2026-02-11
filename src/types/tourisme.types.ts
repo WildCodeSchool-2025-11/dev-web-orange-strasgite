@@ -6,4 +6,5 @@ export interface Attraction {
 	image: string;
 	lieu: string;
 	distance: string;
+	url: string;
 }
