@@ -399,7 +399,6 @@ header {
 		transform: translateY(0);
 	}
 }
-
 /* Responsive */
 @media (max-width: 1024px) {
 	.footerContent {
@@ -408,48 +407,95 @@ header {
 }
 
 @media (max-width: 768px) {
+	.footer {
+		padding: 30px 20px 20px;
+	}
+
 	.footerContent {
 		grid-template-columns: 1fr;
 		gap: 25px;
 	}
+
+	.footerSection {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
 	.footerSection h3 {
 		font-size: 1.4rem;
+		text-align: center;
 	}
+
+	/* Centrer tout le contenu texte */
+	.footer .footerSection p,
+	.footer .footerAddress,
+	.footer .footerContact,
+	.footer .footerContact strong,
+	.footer .newsletterText {
+		text-align: center;
+	}
+
+	/* Centrer les liens de navigation */
+	.footerLinks {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.footerLinks li {
+		text-align: center;
+	}
+
+	.footerLinks a::before {
+		display: none;
+	}
+
+	.footerLinks a:hover {
+		padding-left: 0;
+	}
+
+	/* Centrer la newsletter */
+	.newsletterForm {
+		align-items: center;
+		width: 100%;
+	}
+
 	.newsletterForm input,
 	.newsletterForm button {
 		max-width: 100%;
 	}
+
+	/* Centrer les réseaux sociaux */
 	.socials {
-		justify-content: flex-start;
+		justify-content: center;
 	}
+
 	.footerLegal {
 		flex-direction: column;
 		gap: 10px;
 	}
+
 	.separator {
 		display: none;
 	}
 }
-.visually-hidden {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	white-space: nowrap;
-	border: 0;
-}
 
-:focus-visible {
-	outline: 3px solid #fff8dc;
-	outline-offset: 3px;
-}
+@media (max-width: 480px) {
+	.footer {
+		padding: 20px 15px;
+	}
 
-@media (prefers-reduced-motion: reduce) {
-	* {
-		animation: none;
-		transition: none;
+	.footerSection h3 {
+		font-size: 1.3rem;
+	}
+
+	.footer .footerAddress,
+	.footer .footerContact,
+	.footer .newsletterText,
+	.footer .footerLinks a {
+		font-size: 0.9rem;
 	}
 }
