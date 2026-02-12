@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { FavoritesProvider } from "./context/FavoritesContext";
 import Contact from "./pages/Contact";
 import GerantDashboard from "./pages/GerantDashboard";
 import Home from "./pages/Home";
@@ -17,20 +16,18 @@ import "./styles/global.css";
 
 export default function App() {
 	return (
-		<FavoritesProvider>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/rooms" element={<Rooms />} />
-				<Route path="/rooms/:roomId" element={<RoomDetail />} />
-				<Route path="/services" element={<Services />} />
-				<Route path="/tourism" element={<Tourism />} />
-				<Route path="/contact" element={<Contact />} />
-				<Route path="/gerant" element={<GerantDashboard />} />
-				<Route path="/mon-compte" element={<MonComptePage />} />
-				<Route path="/mes-reservations" element={<MesReservationsPage />} />
-				<Route path="/mes-favoris" element={<MesFavorisPage />} />
-				<Route path="/mentions-legales" element={<MentionsLegalesPage />} />
-			</Routes>
-		</FavoritesProvider>
+		<Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/rooms" element={<Rooms />} />
+			<Route path="/rooms/:roomId" element={<RoomDetail />} />
+			<Route path="/services" element={<Services />} />
+			<Route path="/tourism" element={<Tourism />} />
+			<Route path="/contact" element={<Contact />} />
+			<Route path="/gerant" element={<GerantDashboard />} />
+			<Route path="/mon-compte" element={<MonComptePage />} />
+			<Route path="/mes-reservations" element={<MesReservationsPage />} />
+			<Route path="/mes-favoris" element={<MesFavorisPage />} />
+			<Route path="/mentions-legales" element={<MentionsLegalesPage />} />
+		</Routes>
 	);
 }
