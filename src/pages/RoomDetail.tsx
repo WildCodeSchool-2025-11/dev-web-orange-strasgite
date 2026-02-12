@@ -73,7 +73,7 @@ function RoomDetail() {
 		<>
 			<Box
 				sx={{
-					backgroundColor: "#692817",
+					backgroundColor: "#A5654C",
 					py: 2,
 					px: 3,
 					display: "flex",
