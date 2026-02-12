@@ -10,7 +10,7 @@ export default function HeaderClient() {
 				display: "flex",
 				justifyContent: "space-between",
 				alignItems: "center",
-				background: "#692817",
+				background: "#A5654C",
 			}}
 		>
 			{/* Menu burger fonctionnel */}

@@ -97,7 +97,7 @@ export default function MonComptePage() {
 								sx={{
 									width: 80,
 									height: 80,
-									bgcolor: "primary.main",
+									bgcolor: "#A5654C",
 									fontSize: 32,
 								}}
 							>
