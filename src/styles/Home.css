@@ -1,0 +1,56 @@
+.hero-title {
+	font-size: 4rem;
+	font-weight: 400;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	margin: 0;
+}
+
+.hero-branding {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	justify-content: flex-end;
+}
+
+.hero-logo {
+	width: 60;
+	height: 60px;
+	border-radius: 50%; /* cercle */
+	border: 2px solid white; /* contour blanc */
+	object-fit: cover;
+}
+
+.hero-subtitle {
+	font-size: 1.8rem;
+	margin-top: 1rem;
+}
+.heart {
+	color: red;
+	margin-left: 0.25rem;
+	font-size: 1.2em;
+}
+.home-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 20px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center; /* CENTRE l’avatar */
+
+	background: transparent;
+	z-index: 999;
+	gap: 20px;
+}
+
+.home-header > *:last-child {
+	margin-left: auto; /* pousse le BurgerMenu à droite */
+}
+
+.home-logo {
+	color: white;
+	font-size: 24px;
+	font-family: Georgia, serif;
+}
